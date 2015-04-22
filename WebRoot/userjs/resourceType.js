@@ -2,7 +2,7 @@
 	var rowEditor=undefined;
 	$(function(){
 		datagrid=$("#dg").datagrid({
-			url:"/chong/ResourceTypeAjaxServlet",//加载的URL
+			url:_contextPath+"/ResourceTypeAjaxServlet",//加载的URL
 		    isField:"id",
 			pagination:true,//显示分页
 			pageSize:5,//分页大小
@@ -62,7 +62,7 @@
 			        			{
 			        				
 			        				$.ajax({
-			        					url : '/chong/ResourceTypeAjaxServlet/m/delete',
+			        					url : _contextPath+'/ResourceTypeAjaxServlet/m/delete.action',
 			        					data : {"id":rows[0].id},
 			        					dataType : 'json',
 			        					success : function(r) {
@@ -125,10 +125,10 @@
 
 				var url = '';
 				if (inserted.length > 0) {
-					url = '/chong/ResourceTypeAjaxServlet/m/add';
+					url = _contextPath+'/ResourceTypeAjaxServlet/m/add.action';
 				}
 				if (updated.length > 0) {
-					url = '/chong/ResourceTypeAjaxServlet/m/update';
+					url = _contextPath+'/ResourceTypeAjaxServlet/m/update.action';
 				}
 
 				$.ajax({

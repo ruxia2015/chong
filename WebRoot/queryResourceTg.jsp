@@ -21,7 +21,7 @@
 	<form id="addForm"
 		action="<%=request.getContextPath()%>/AccountServlet" method="get"
 		style="float: left;">
-<table id="dg" class="easyui-datagrid" title="资源管理" style="width:900px;height:1200px;">
+<table id="dg" class="easyui-datagrid" title="资源管理" style="width:900px;height:1200px;">	
 
 
 		

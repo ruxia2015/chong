@@ -14,6 +14,7 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
     
     public List<T> queryList(T bean)
     {
+
       String sql =  generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(), bean, getBeanClass());
       
         try
@@ -39,6 +40,11 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
     public T findBean(T t)
     {
         String sql =  generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(), t, getBeanClass());
+        
+       List<T> ts =queryList(t);
+       if(ts!=null && ts.size()>0){
+           return ts.get(0);
+       }
         
         return null;
     }

@@ -21,11 +21,7 @@ public class TgAjaxServlet extends BaseAjaxServlet
 {
     private TgDAO tgDAO = new TgDAO();
     
-    @Override
-    protected Object getObject()
-    {
-        return new TgAjaxServlet();
-    }
+
     
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)

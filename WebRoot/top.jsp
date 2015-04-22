@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="z-index:9999; width:100%;text-align: center;font-size: 24px;background: url('images/top_bg.png');background-repeat: repeat-x;top: 0px;height: 59px;background-color: #C7E1F1;line-height: 50px;" >
+	<div style="z-index:9999; width:100%;text-align: center;font-size: 24px;background: url('<%=request.getContextPath() %>/images/top_bg.png');background-repeat: repeat-x;top: 0px;height: 59px;background-color: #C7E1F1;line-height: 50px;" >
 		<span style="color: white;font-weight: bold;"></span>
 	</div>
 </body>

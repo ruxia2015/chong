@@ -1,6 +1,5 @@
 package DAO;
 
-import base.BaseDAO;
 import base.BaseSimpleDAO;
 import bean.ResourceTypeBean;
 

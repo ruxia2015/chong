@@ -16,19 +16,22 @@ public abstract class BaseServlet extends HttpServlet
     protected Object executeMethod(HttpServletRequest req,
             HttpServletResponse resp) throws Exception
     {
+        System.out.println("请求的地址是："+req.getRequestURI());
         String method = HttpUtil.parseMthod(req);
         if (method == null || method.trim().equals(""))
         {
             method = "execute";
+        }else if("ignore".equals(method)){
+            return null;
         }
-        Class cls = getObject().getClass();
+        Class cls = this.getClass();
         Method[] ms = cls.getMethods();
         Method m = cls.getDeclaredMethod(method,
                 HttpServletRequest.class,
                 HttpServletResponse.class);
         
         m.setAccessible(true);
-        Object value = m.invoke(getObject(), req, resp);
+        Object value = m.invoke(this, req, resp);
         return value;
         
     }
@@ -52,7 +55,11 @@ public abstract class BaseServlet extends HttpServlet
         catch (Exception e)
         {
             e.printStackTrace();
-            execute(req, resp);
+            try{
+                execute(req, resp);
+            }catch(Exception el){
+                el.printStackTrace();
+            }
         }
     }
     
@@ -63,10 +70,10 @@ public abstract class BaseServlet extends HttpServlet
         doPost(req, resp);
     }
     
-    protected abstract Object getObject();
+
     
     protected abstract void execute(HttpServletRequest req,
-            HttpServletResponse resp);
+            HttpServletResponse resp) throws Exception;
     
     public String getContextPath(HttpServletRequest req)
     {

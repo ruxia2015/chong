@@ -14,7 +14,7 @@ public class ResourceBean
     /**
      * 域名
      */
-	@SQLAnnotation
+	@SQLAnnotation(update_is_where=true)
     private String domain;
     
     /**

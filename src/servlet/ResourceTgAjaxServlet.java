@@ -25,12 +25,7 @@ public class ResourceTgAjaxServlet extends BaseAjaxServlet
     private ResourceTgDAO tgDAO = new ResourceTgDAO();
     private ResourceDAO resourceDAO = new ResourceDAO();
     
-    @Override
-    protected Object getObject()
-    {
-        return new ResourceTgAjaxServlet();
-    }
-    
+
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
     {
@@ -47,7 +42,8 @@ public class ResourceTgAjaxServlet extends BaseAjaxServlet
     		ResourceTgBean rtBean = new ResourceTgBean();    		
     		rtBean.setResourceId(tempR.getId());
     		rtBean.setResourceDomain(tempR.getDomain());
-    		rtBean.setRegisterState(tempR.getRegisterState());    		
+    		rtBean.setRegisterState(tempR.getRegisterState());    	
+    		rtBean.setResourceTypeName(tempR.getType());
     		
     		resourceMap.put(tempR.getId(), rtBean);
     	}

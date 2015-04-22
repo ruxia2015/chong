@@ -48,17 +48,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <script type="text/javascript">
    
    $.ajax({
-		url : "/chong/TgAjaxServlet",
+		url : "<%=request.getContextPath()%>/TgAjaxServlet",
 		data :null,
 		dataType : 'json',
 		success : function(r) {
 				var obj = 	r;
-				for(var i=0;i<obj.length;i++){
-					var con = ' <p> <a href="javascript:void(0)" onclick="openTgResource('+obj[i].id+')">'+obj[i].domain+'</a></p>';
-					$("#tgs").append(con);
+				if(obj!=null){
+					for(var i=0;i<obj.length;i++){
+						var con = ' <p> <a href="javascript:void(0)" onclick="openTgResource(\''+obj[i].domain+'\',\''+obj[i].id+'\')">'+obj[i].domain+'</a></p>';
+						$("#tgs").append(con);
+					}
 				}
-			
-			datagrid.datagrid('unselectAll');
+
+
 		}
 	});
    
@@ -75,7 +77,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		    	$('#tgTabs').tabs('add',{
    					title: name,
    					content: '<iframe width="100%" height="100%" src="'+url+'"/>',
-   				//	 href: '<%=request.getContextPath()%>/queryTgResource.jsp',
    					closable: true
    				});
    			}
@@ -91,18 +92,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a>		   
 		</div>
 		<div title="资源管理" style="padding:10px;" >
-		<div style="padding:10px;">
-		  <a href="<%=request.getContextPath() %>/ResourceServlet/m/add">添加资源</a>
-		</div>
-		<br/>
-		<div style="padding:10px;">
+		<p>
+		  <a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a>
+		</p>
+		<p>
 		  <a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a>
-		</div>
+		</p>
 		</div>
 		<div title="推广网站管理" style="padding:10px;">
-		 <div>
-		  <a href="<%=request.getContextPath() %>/TgServlet/m/add">添加推广网站</a>
-		</div>
+
 		<div>
 		  <a href="<%=request.getContextPath() %>/TgServlet">推广网站管理</a>
 		</div>

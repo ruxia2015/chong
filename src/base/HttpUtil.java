@@ -14,7 +14,7 @@ public class HttpUtil
         {
             String[] paths = actionPath.split("/");
             int arrLen = paths.length;
-            if (arrLen >= 3 && paths[arrLen - 2].equals("m"))
+            if (arrLen >= 3 && paths[arrLen - 2].equals("m") && actionPath.endsWith("action"))
             {
                 String methodNAme = paths[arrLen - 1];
                 if(methodNAme.contains(".")){
@@ -22,10 +22,12 @@ public class HttpUtil
                 }
                 
                 return methodNAme;
+            }else if(arrLen==1){
+                return null;
             }
         }
         
-        return "";
+        return "ignore";
         
     }
 }

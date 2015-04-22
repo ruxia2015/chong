@@ -17,11 +17,7 @@ public class ResourceTypeServlet extends BaseServlet
 {
 private ResourceTypeDAO resourceTypeDAO = new ResourceTypeDAO();
 
-@Override
-protected Object getObject()
-{
-    return new ResourceTypeServlet();
-}
+
 
 @Override
 protected void execute(HttpServletRequest req, HttpServletResponse resp)

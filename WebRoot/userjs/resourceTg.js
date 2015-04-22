@@ -5,7 +5,7 @@ $(function() {
 	datagrid = $("#dg")
 			.datagrid(
 					{
-						url : "/chong/ResourceTgAjaxServlet?tgId=" + tgId,// 加载的URL
+						url : _contextPath+"/ResourceTgAjaxServlet?tgId=" + tgId,// 加载的URL
 						isField : "id",
 						pagination : true,// 显示分页
 						pageSize : 5,// 分页大小
@@ -36,7 +36,13 @@ $(function() {
 									field : 'resourceDomain',
 									title : '资源名称',
 									width : 100
-								}, {
+								},
+								{
+									field : 'resourceTypeName',
+									title : '资源类型',
+									width : 100
+								}, 
+								{
 									field : 'registerState',
 									title : '是否可以注册',
 									width : 80,
@@ -119,7 +125,7 @@ $(function() {
 
 																	$
 																			.ajax({
-																				url : '/chong/ResourceTgAjaxServlet/m/delete',
+																				url : _contextPath+'/ResourceTgAjaxServlet/m/delete.action',
 																				data : {
 																					"id" : rows[0].id
 																				},
@@ -215,10 +221,10 @@ $(function() {
 
 							var url = '';
 							if (inserted.length > 0) {
-								url = '/chong/ResourceTgAjaxServlet/m/add';
+								url = _contextPath+'/ResourceTgAjaxServlet/m/add.action';
 							}
 							if (updated.length > 0) {
-								url = '/chong/ResourceTgAjaxServlet/m/update';
+								url = _contextPath+'/ResourceTgAjaxServlet/m/update.action';
 							}
 
 							$.ajax({

@@ -18,11 +18,7 @@ public class ResourceTgServlet extends BaseServlet
     private ResourceTgDAO tgDAO = new ResourceTgDAO();
 
     
-    @Override
-    protected Object getObject()
-    {
-        return new ResourceTgServlet();
-    }
+
     
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
@@ -36,9 +32,9 @@ public class ResourceTgServlet extends BaseServlet
         ResourceTgBean bean = new ResourceTgBean();
         
         
-        List<ResourceTgBean> beans = tgDAO.queryList(bean);
+//        List<ResourceTgBean> beans = tgDAO.queryList(bean);
         
-        req.setAttribute("tgList", beans);
+//        req.setAttribute("tgList", beans);
         try
         {
             req.getRequestDispatcher("/queryResourceTg.jsp").forward(req, resp);

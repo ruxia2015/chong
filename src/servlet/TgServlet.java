@@ -15,11 +15,7 @@ public class TgServlet extends BaseServlet
 {
     private TgDAO tgDAO = new TgDAO();
     
-    @Override
-    protected Object getObject()
-    {
-        return new TgServlet();
-    }
+
     
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)

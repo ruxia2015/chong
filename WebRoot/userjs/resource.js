@@ -7,7 +7,7 @@
 					      {id:"0",text:"否"}
 					      ];
 		datagrid=$("#dg").datagrid({
-			url:"/chong/ResourceAjaxServlet",//加载的URL
+			url:_contextPath+"/ResourceAjaxServlet",//加载的URL
 		    isField:"id",
 			pagination:true,//显示分页
 			pageSize:5,//分页大小
@@ -44,7 +44,7 @@
 							type : 'combobox',
 							options : {
 								valueField:'id',textField:'name',
-								url:"/chong/ResourceTypeAjaxServlet"
+								url:_contextPath+"/ResourceTypeAjaxServlet"
 							}
 						}},  
 						{field:'accessState',title:'accessState',width:100,editor : {
@@ -135,7 +135,7 @@
 			        			{
 			        				
 			        				$.ajax({
-			        					url : '/chong/ResourceAjaxServlet/m/delete',
+			        					url : _contextPath+'/ResourceAjaxServlet/m/delete.action',
 			        					data : {"id":rows[0].id},
 			        					dataType : 'json',
 			        					success : function(r) {
@@ -198,10 +198,10 @@
 
 				var url = '';
 				if (inserted.length > 0) {
-					url = '/chong/ResourceAjaxServlet/m/add';
+					url = _contextPath+'/ResourceAjaxServlet/m/add.action';
 				}
 				if (updated.length > 0) {
-					url = '/chong/ResourceAjaxServlet/m/update';
+					url = _contextPath+'/ResourceAjaxServlet/m/update.action';
 				}
 
 				$.ajax({

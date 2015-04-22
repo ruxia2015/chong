@@ -22,11 +22,7 @@ public class ResourceTypeAjaxServlet extends BaseAjaxServlet
 {
     private ResourceTypeDAO resourceTypeDAO = new ResourceTypeDAO();
     
-    @Override
-    protected Object getObject()
-    {
-        return new ResourceTypeAjaxServlet();
-    }
+
     
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)

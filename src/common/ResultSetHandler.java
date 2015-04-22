@@ -82,9 +82,8 @@ public class ResultSetHandler<T>
                 }else{
                 	continue;
                 }
-                System.out.println(field.getName());
-                System.out.println(field.getType().getTypeName());
-                Method method = cls.getMethod(setMethodName,Class.forName(field.getType().getTypeName()));
+
+                Method method = cls.getMethod(setMethodName,Class.forName(field.getType().getName()));
                 method.setAccessible(true);
                 method.invoke(obj, val);
                 

@@ -31,11 +31,25 @@ public class ResourceTgBean {
 	@SQLAnnotation(is_Ingore = true)
 	private String registerState;
 	
+	@SQLAnnotation(is_Ingore=true)
+	private String resourceTypeName;
+	
+	
 	
 	
 	
 
-	public String getResourceIds() {
+	public String getResourceTypeName()
+    {
+        return resourceTypeName;
+    }
+
+    public void setResourceTypeName(String resourceTypeName)
+    {
+        this.resourceTypeName = resourceTypeName;
+    }
+
+    public String getResourceIds() {
 		return resourceIds;
 	}
 
