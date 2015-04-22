@@ -7,44 +7,45 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.ResourceDAO;
 import DAO.ResourceTypeDAO;
 import base.BaseServlet;
+import bean.ResourceBean;
 import bean.ResourceTypeBean;
 
 public class ResourceTypeServlet extends BaseServlet
 {
-    private ResourceTypeDAO resourceTypeDAO = new ResourceTypeDAO();
+private ResourceTypeDAO resourceTypeDAO = new ResourceTypeDAO();
+
+@Override
+protected Object getObject()
+{
+    return new ResourceTypeServlet();
+}
+
+@Override
+protected void execute(HttpServletRequest req, HttpServletResponse resp)
+{
+    ResourceTypeBean bean = new ResourceTypeBean();
     
-    @Override
-    protected Object getObject()
+    List<ResourceTypeBean> beans = resourceTypeDAO.queryList(bean);
+    
+    req.setAttribute("resourceTypeList", beans);
+    try
     {
-        return new ResourceTypeServlet();
+        req.getRequestDispatcher("/queryResourceType.jsp").forward(req, resp);
     }
-    
-    @Override
-    protected void execute(HttpServletRequest req, HttpServletResponse resp)
+    catch (ServletException e)
     {
-        ResourceTypeBean bean = new ResourceTypeBean();
-        
-        List<ResourceTypeBean> beans = resourceTypeDAO.queryList(bean);
-        
-        req.setAttribute("resourceTypeList", beans);
-        try
-        {
-            req.getRequestDispatcher(getContextPath(req)
-                    + "/queryResourceType.jsp").forward(req, resp);
-        }
-        catch (ServletException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    catch (IOException e)
+    {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
     }
     
 }
+}
+

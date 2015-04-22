@@ -21,14 +21,14 @@ public abstract class BaseServlet extends HttpServlet
         {
             method = "execute";
         }
-        Class cls = this.getClass();
+        Class cls = getObject().getClass();
         Method[] ms = cls.getMethods();
         Method m = cls.getDeclaredMethod(method,
                 HttpServletRequest.class,
                 HttpServletResponse.class);
         
         m.setAccessible(true);
-        Object value = m.invoke(this, req, resp);
+        Object value = m.invoke(getObject(), req, resp);
         return value;
         
     }
@@ -43,7 +43,8 @@ public abstract class BaseServlet extends HttpServlet
             
             for (String key : param.keySet())
             {
-                req.setAttribute(key, param.get(key));
+            	System.out.println(param.get(key));
+                req.setAttribute(key, req.getParameter(key));
             }
             
             executeMethod(req, resp);
@@ -62,12 +63,14 @@ public abstract class BaseServlet extends HttpServlet
         doPost(req, resp);
     }
     
+    protected abstract Object getObject();
+    
     protected abstract void execute(HttpServletRequest req,
             HttpServletResponse resp);
     
-    
     public String getContextPath(HttpServletRequest req)
     {
+    	System.out.println(req.getContextPath());
         return req.getContextPath();
     }
     

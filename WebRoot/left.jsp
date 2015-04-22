@@ -46,12 +46,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
    
    <script type="text/javascript">
+   
+   $.ajax({
+		url : "/chong/TgAjaxServlet",
+		data :null,
+		dataType : 'json',
+		success : function(r) {
+				var obj = 	r;
+				for(var i=0;i<obj.length;i++){
+					var con = ' <p> <a href="javascript:void(0)" onclick="openTgResource('+obj[i].id+')">'+obj[i].domain+'</a></p>';
+					$("#tgs").append(con);
+				}
+			
+			datagrid.datagrid('unselectAll');
+		}
+	});
+   
+   
    	function openTgResource(tagName,tgId){   
    		if(document.getElementById("tgTabs")==null){
    			window.open("<%=request.getContextPath()%>/queryTgResourceMain.jsp" );   			
    		}else{
-   			//var url ="<%=request.getContextPath()%>/QueryTgResourceServlet?tgId="+tgId;   
-   			var url ="<%=request.getContextPath()%>/queryTgResource.jsp";  
+   			var url ="<%=request.getContextPath()%>/ResourceTgServlet?tgId="+tgId;  
    			var name = '推广_'+tagName;
    			if($('#tgTabs').tabs("exists",name)){
    				//$("#tagTabs").tabs("select",name);
@@ -72,19 +88,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>  
    	<div class="easyui-accordion" data-options="multiple:true" style="width:250px;height1:300px;">
 		<div title="设置"  style="overflow:auto;padding:10px;" >
-		   <a href="queryResourceType.jsp">资源类型管理</a>		   
+		   <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a>		   
 		</div>
 		<div title="资源管理" style="padding:10px;" >
-		  <a href="">添加资源</a>
-		  <a href="">资源查询</a>
+		<div style="padding:10px;">
+		  <a href="<%=request.getContextPath() %>/ResourceServlet/m/add">添加资源</a>
+		</div>
+		<br/>
+		<div style="padding:10px;">
+		  <a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a>
+		</div>
 		</div>
 		<div title="推广网站管理" style="padding:10px;">
-		  <a href="">添加推广网站</a>
-		  <a href="">查询推广网站</a>
+		 <div>
+		  <a href="<%=request.getContextPath() %>/TgServlet/m/add">添加推广网站</a>
 		</div>
-		<div title="资源账号管理" style="padding:10px;" data-options="selected:true">
-		  <p> <a href="javascript:void(0)" onclick="openTgResource('网站')">推广网站A</a></p>
-		  <p> <a href="javascript:void(0)" onclick="openTgResource('baidu')">推广网站B</a></p>
+		<div>
+		  <a href="<%=request.getContextPath() %>/TgServlet">推广网站管理</a>
+		</div>
+		</div>
+		<div title="资源账号管理" style="padding:10px;" data-options="selected:true" id="tgs">
+
 		</div>
 
 	</div>

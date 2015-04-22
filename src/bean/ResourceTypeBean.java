@@ -1,10 +1,14 @@
 package bean;
 
+import annotation.SQLAnnotation;
+
 public class ResourceTypeBean
 {
     
+	@SQLAnnotation(update_is_where=true)
     private String id;
     
+	@SQLAnnotation(update_is_where=false)
     private String name;
     
     private String remark;

@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import DAO.ResourceTypeDAO;
 import common.ResultSetHandler;
 import common.SimpleSQLTemplate;
 import common.StringTools;
@@ -30,7 +29,7 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
             // TODO Auto-generated catch block
             e.printStackTrace();
         }catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
         
         return null;
@@ -88,7 +87,5 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
         }
         return 0;
     }
-    
-
     
 }

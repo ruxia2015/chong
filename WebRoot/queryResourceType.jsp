@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>新增报文</title>
+<title>资源类型管理</title>
 
 <jsp:include page="common.jsp" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resourceType.js"></script>
 </head>
 <body>
 <jsp:include page="top.jsp"/>
@@ -18,43 +19,38 @@
 	<form id="addForm"
 		action="<%=request.getContextPath()%>/AccountServlet" method="get"
 		style="float: left;">
-<table id="dg" class="easyui-datagrid" title="资源管理" style="width:700px;height:auto"
-			data-options="
-				iconCls: 'icon-edit',
-				singleSelect: true,
-				toolbar: '#tb',
-				url: 'datagrid_data1.json',
-				method: 'get',
-				onClickRow: onClickRow
-			">
+<table id="dg" class="easyui-datagrid" title="资源管理" style="width:700px;height:1200px;"
+>
 		<thead>
 			<tr>
-				<th data-options="field:'类型',width:80">类型ID</th>
-				<th data-options="field:'type',width:250,editor:'textbox'">类型</th>
+				<th data-options="field:'id',width:80">类型ID</th>
+				<th data-options="field:'name',width:250,editor:'textbox'">类型</th>
 				<th data-options="field:'remark',width:250,editor:'textbox'">备注信息</th>
-				<th data-options="field:'类型',width:80">操作</th>
+				<th data-options="field:'oper',width:80">操作</th>
 			</tr>
 		</thead>
+		<c:forEach items="${resourceTypeList }" var="item">
 		<tr>
-			<td>11</td>
-			<td>11</td>
-			<td>11</td>
+			<td>${item.id }</td>
+			<td>${item.name }</td>
+			<td>${item.name }</td>
 			<td><input type="button"></td>
 		</tr>
+		</c:forEach>
 
 		
 	</table>
 
-	<div id="tb" style="height:auto">
+	<!-- <div id="tb" style="height:auto">
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
-	</div>
+	</div> -->
 	</form>
 	</div>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		var editIndex = undefined;
 		
 		function loadData(){
@@ -114,6 +110,6 @@
 			var rows = $('#dg').datagrid('getChanges');
 			alert(rows.length+' rows are changed!');
 		}
-	</script>
+	</script> -->
 </body>
 </html>

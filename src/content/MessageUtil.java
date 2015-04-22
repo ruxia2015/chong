@@ -3,8 +3,6 @@ package content;
 import java.text.ParseException;
 import java.util.Date;
 
-import common.DateUtil;
-
 public class MessageUtil
 {
     

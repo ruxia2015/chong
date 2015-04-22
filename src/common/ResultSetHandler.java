@@ -17,7 +17,7 @@ public class ResultSetHandler<T>
     public static List resultSetToList(ResultSet rs, Class cls)
             throws Exception
     {
-        Field[] fields = cls.getFields();
+        Field[] fields = cls.getDeclaredFields();
         
         Map<String, Field> fMap = new HashMap<String, Field>();
         for (Field f : fields)
@@ -40,18 +40,25 @@ public class ResultSetHandler<T>
                 String colName = meta.getColumnName(i);
                 
                 Field field = fMap.get(colName.toLowerCase());
+                if(field==null){
+                	continue;
+                }
                 String fName = field.getName();
                 Type fType = field.getType();
                 //設置方法名(将字段名的第一个转换成大写，获取其设置的方法)
                 String setMethodName = "set"
-                        + fName.replace(fName.substring(0, 1),
+                        + fName.replaceFirst(fName.substring(0, 1),
                                 fName.substring(0, 1).toUpperCase());
                 
                 Object value = rs.getObject(colName);
                 
+                if(value==null){
+                	continue;
+                }
+                
                 Object val = null;
                 
-                String fTypeClassName = fType.getClass().getName();
+                String fTypeClassName = field.getType().getSimpleName();
                 if (fTypeClassName.equalsIgnoreCase("int")
                         || fTypeClassName.equalsIgnoreCase("integer"))
                 {
@@ -69,13 +76,15 @@ public class ResultSetHandler<T>
                 {
                     val = Boolean.valueOf(value.toString());
                 }
-                else
+                else if (fTypeClassName.equalsIgnoreCase("string"))
                 {
-                    val = value;
+                    val =String.valueOf(value);
+                }else{
+                	continue;
                 }
-                
-                Method method = cls.getMethod(setMethodName, field.getType()
-                        .getClass());
+                System.out.println(field.getName());
+                System.out.println(field.getType().getTypeName());
+                Method method = cls.getMethod(setMethodName,Class.forName(field.getType().getTypeName()));
                 method.setAccessible(true);
                 method.invoke(obj, val);
                 

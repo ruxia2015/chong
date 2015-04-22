@@ -1,12 +1,9 @@
 package bean;
 
-import annotation.ExportHeaderAnnotation;
-
 public class ResourceAccount
 {
     private int id;
     
-    @ExportHeaderAnnotation(headerName="资源ID")
     private int resourceId;
     
     private int tgId;
@@ -17,7 +14,6 @@ public class ResourceAccount
     
     private String email;
     
-    @ExportHeaderAnnotation(needConvert = true,headerName="状态")
     private String state;
     
     public int getId()

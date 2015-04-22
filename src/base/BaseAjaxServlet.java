@@ -19,8 +19,16 @@ public abstract class BaseAjaxServlet extends BaseServlet
             throws ServletException, IOException
     {
 
-        execute(req, resp);        
+
+    	try {
+			executeMethod(req, resp);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}        
         String json = (String)req.getAttribute("json");
+        
+        System.out.println(json);
         
         if(StringTools.isEmptyOrNone(json)){
             AjaxJsonBean jsonBean = new AjaxJsonBean();
@@ -32,8 +40,8 @@ public abstract class BaseAjaxServlet extends BaseServlet
         PrintWriter out;
         try
         {
+        	resp.setContentType("text/html;charset=utf-8");
             out = resp.getWriter();
-            resp.setContentType("text/html");
             out.println(json);
             out.close();
         }

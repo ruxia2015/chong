@@ -5,123 +5,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>新增报文</title>
+<title>资源管理</title>
 
 <jsp:include page="common.jsp" />
-	
-
-
-<script type="text/javascript">
- 	$(function() {
-		$("#myTable").tablesorter();
-		
-/* 		$("#page").pagination("onSelectPage",function(pageNumber,pageSize){
-			alert("ass");
-			
-		}); */		
-		 
-		$('#page').pagination({ 
-			total:100, 
-			pageSize:20 ,
-			pageNumber:3,
-			onChangePageSize : function(pageSize) {
-		    $("#pageSize").val(pageSize);
-			                      alert(pageSize);
-			                  },
-			                  onSelectPage:function(pageIndex){
-			                      alert(pageIndex);
-			                      
-			                      $("#currentPage").val(pageIndex);
-			                  }
-			             
-		}); 
-		
-	}); 
- 	
- 	
- 	function changePage(page_index, jq){
- 		alert(page_index+"    " +jq);
- 	}
- 	
- 	function query(){
- 		
- 	}
- 	
-</script>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/userjs/resource.js"></script>
 </head>
-<body style="padding:40px;">
-
+<body>
 <jsp:include page="top.jsp"/>
 <div style="float:left;width:260px;">
 	<jsp:include page="left.jsp"/>
 </div>
 <div style="float:left;width:auto;border:1px solid #95B8E7;min-width:800px;">
 	<form id="addForm"
-		action="<%=request.getContextPath()%>/QueryResourcetServlet" method="get"
-		style="">
-		<table class="tablesorter tablesorter-blue" role="grid" id="myTable">
-			<thead>
-				<tr role="row" class="tablesorter-headerRow">
-					<th data-column="0"
-						class="tablesorter-header tablesorter-headerAsc" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="ascending"
-						aria-label="First Name: Ascending sort applied, activate to apply a descending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">ID</div></th>
-					<th data-column="1"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Last Name: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">域名</div></th>
-					<th data-column="2"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Age: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">地址</div></th>
-					<th data-column="3"
-						class="tablesorter-header tablesorter-headerDesc" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="descending"
-						aria-label="Total: Descending sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">类型</div></th>
-					<th data-column="4"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Discount: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">访问状态</div></th>
-					<th data-column="5"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Date: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">注册状态</div></th>
-							<th data-column="5"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Date: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">其他的状态</div></th>
-							<th data-column="5"
-						class="tablesorter-header tablesorter-headerUnSorted" tabindex="0"
-						scope="col" role="columnheader" aria-disabled="false"
-						unselectable="on" aria-sort="none"
-						aria-label="Date: No sort applied, activate to apply an ascending sort"
-						style="-webkit-user-select: none;"><div
-							class="tablesorter-header-inner">备注信息</div></th>
-				</tr>
-			</thead>
-			<tbody aria-live="polite" aria-relevant="all">			
+		action="<%=request.getContextPath()%>/AccountServlet" method="get"
+		style="float: left;">
+<table id="dg" class="easyui-datagrid" title="资源管理" style="width:700px;height:1200px;"
+>
+		<thead>
+			<tr>
+				<th data-options="field:'id',width:80">ID</th>
+				<th data-options="field:'domain',width:250,editor:'textbox'">域名</th>
+				<th data-options="field:'url',width:250,editor:'textbox'">地址</th>
+				<th data-options="field:'type',width:80">类型</th>
+				<th data-options="field:'accessState',width:80">访问状态</th>
+				<th data-options="field:'registerState',width:80">注册状态</th>
+				<th data-options="field:'otherState',width:80">其他的状态</th>
+				<th data-options="field:'remark',width:80">备注信息</th>
+			</tr>
+		</thead>
 				<c:forEach items="${resourceList}" var ="item">
 				<tr role="row">
 					<td>${item.id }</td>
@@ -146,21 +57,79 @@
 					<td>${item.remark }</td>
 				</tr>				
 				</c:forEach>
-				
-			</tbody>
-		</table>
-		<div class="easyui-panel" >
-		<div class="easyui-pagination" id="page" data-options="
-					total:114,
-					layout:['list','sep','first','prev','links','next','last','sep','refresh']">
-		</div>
+
 		
-		<input type="hidden1" value="" name="currentPage" id="currentPage"/>
-		<input type="hidden1" value="" name="pageSize" id="pageSize"/>
-	</div>
-		
+	</table>
+
+	<!-- <div id="tb" style="height:auto">
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
+	</div> -->
 	</form>
 	</div>
-	
+	<!-- <script type="text/javascript">
+		var editIndex = undefined;
+		
+		function loadData(){
+			
+		}
+		
+		
+		
+		function endEditing(){
+			if (editIndex == undefined){return true}
+			if ($('#dg').datagrid('validateRow', editIndex)){
+				//var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'productid'});
+				//var productname = $(ed.target).combobox('getText');
+			//	$('#dg').datagrid('getRows')[editIndex]['productname'] = productname;
+				$('#dg').datagrid('endEdit', editIndex);
+				editIndex = undefined;
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function onClickRow(index){
+			if (editIndex != index){
+				if (endEditing()){
+					$('#dg').datagrid('selectRow', index)
+							.datagrid('beginEdit', index);
+					editIndex = index;
+				} else {
+					$('#dg').datagrid('selectRow', editIndex);
+				}
+			}
+		}
+		function append(){
+			if (endEditing()){
+				$('#dg').datagrid('appendRow',{status:'P'});
+				editIndex = $('#dg').datagrid('getRows').length-1;
+				$('#dg').datagrid('selectRow', editIndex)
+						.datagrid('beginEdit', editIndex);
+			}
+		}
+		function removeit(){
+			if (editIndex == undefined){return}
+			$('#dg').datagrid('cancelEdit', editIndex)
+					.datagrid('deleteRow', editIndex);
+			editIndex = undefined;
+		}
+		function accept(){
+			if (endEditing()){
+				$('#dg').datagrid('acceptChanges');
+			}
+		}
+		function reject(){
+			$('#dg').datagrid('rejectChanges');
+			editIndex = undefined;
+		}
+		function getChanges(){
+			var rows = $('#dg').datagrid('getChanges');
+			alert(rows.length+' rows are changed!');
+		}
+	</script> -->
 </body>
 </html>

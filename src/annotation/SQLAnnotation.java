@@ -1,5 +1,10 @@
 package annotation;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 
 /**
  * sql语句注解
@@ -11,6 +16,8 @@ package annotation;
  * @see  [相关类/方法]
  * @since  [产品/模块版本]
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD})
 public @interface SQLAnnotation
 {
 
@@ -23,7 +30,7 @@ public @interface SQLAnnotation
      * @exception throws [违例类型] [违例说明]
      * @see [类、类#方法、类#成员]
      */
-    public boolean update_is_where() default true;
+    public boolean update_is_where() default false;
     
     
     /**
@@ -47,7 +54,7 @@ public @interface SQLAnnotation
      * @exception throws [违例类型] [违例说明]
      * @see [类、类#方法、类#成员]
      */
-    public String where_column();
+    public String where_column() default "";
     
     /**
      * 是否为表中的字段，默认为是
@@ -60,6 +67,8 @@ public @interface SQLAnnotation
      */
     public boolean is_column() default true;
     
+    
+    public boolean is_Ingore() default false;
     
     
 }
