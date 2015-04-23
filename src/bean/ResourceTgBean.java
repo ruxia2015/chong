@@ -1,5 +1,6 @@
 package bean;
 
+import annotation.ExportHeaderAnnotation;
 import annotation.SQLAnnotation;
 
 public class ResourceTgBean {
@@ -10,36 +11,63 @@ public class ResourceTgBean {
 	@SQLAnnotation(update_is_where = true)
 	private String id;
 
+	
+	@SQLAnnotation(is_Ingore=true)
 	private String tgId;
 
+	@ExportHeaderAnnotation(headerName="资源ID")
 	private String resourceId;
 
+	@ExportHeaderAnnotation(headerName="账号")
 	private String account;
 
+	@ExportHeaderAnnotation(headerName="密码")
 	private String password;
 
+	@ExportHeaderAnnotation(headerName="邮箱")
 	private String email;
 
+	@ExportHeaderAnnotation(headerName="推广的站")
 	private String tgDomain;
 
 	@SQLAnnotation(is_column = false, where_oper = "in", where_column = "resourceId")
 	private String resourceIds;
 
-
+	@ExportHeaderAnnotation(headerName="资源域名")
 	@SQLAnnotation(is_Ingore = true)
 	private String resourceDomain;
+	
+	
+	@ExportHeaderAnnotation(isIngore=true)
 	@SQLAnnotation(is_Ingore = true)
 	private String registerState;
 	
+	@ExportHeaderAnnotation(headerName="资源类型")
 	@SQLAnnotation(is_Ingore=true)
 	private String resourceTypeName;
+	
+	@ExportHeaderAnnotation(headerName="资源")
+	@SQLAnnotation(is_Ingore=true)
+	private String resourceUrl;
+	
+	
 	
 	
 	
 	
 	
 
-	public String getResourceTypeName()
+	public String getResourceUrl()
+    {
+        return resourceUrl;
+    }
+
+    public void setResourceUrl(String resourceUrl)
+    {
+        this.resourceUrl = resourceUrl;
+    }
+
+    public String getResourceTypeName()
     {
         return resourceTypeName;
     }

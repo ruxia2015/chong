@@ -207,6 +207,13 @@ $(function() {
 										rowEditor = undefined;
 										datagrid.datagrid('rejectChanges')
 									}
+								} , {
+									text : "导出",
+									iconCls : "icon-save",
+									handler : function() {
+										url = _contextPath+'/ResourceTgAjaxServlet/m/export.action';
+											window.open(url);
+									}
 								} ],
 						onAfterEdit : function(rowIndex, rowData, changes) {
 							var inserted = datagrid.datagrid('getChanges',
@@ -240,8 +247,8 @@ $(function() {
 												datagrid
 														.datagrid('acceptChanges');
 												$.messager.show({
-													msg : "tianjiachenggong",
-													title : '成功'
+													msg : "添加成功",
+													title : '消息'
 												});
 												editRow = undefined;
 												datagrid.datagrid('reload');

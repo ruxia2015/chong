@@ -56,6 +56,7 @@ public class ExportHeaderAnnotationUtil
         String header = "";
         for (Field f : fields)
         {
+            f.setAccessible(true);
             ExportHeaderAnnotation annotation = (ExportHeaderAnnotation) AnnontationUtil.getFieldAnnotation(f,
                     ExportHeaderAnnotation.class);
             
@@ -64,7 +65,7 @@ public class ExportHeaderAnnotationUtil
                 continue;
             }
             else if (annotation != null
-                    && StringTools.isEmptyOrNone(annotation.headerName()))
+                    && !StringTools.isEmptyOrNone(annotation.headerName()))
             {
                 header = header + annotation.headerName() + ",";
             }

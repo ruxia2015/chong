@@ -1,22 +1,40 @@
 package common;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import bean.ResourceTgBean;
 import annotation.util.ExportHeaderAnnotationUtil;
 
 public class CsvUtil
 {
     
+    
     public static File wirteToCsv(List objs, String fiePath)
     {
         
         String filename = "";
+        String content = getCsvContent(objs);
+        
+        filename = filename + "_" + DateUtil.getNowDate() + ".csv";
+        
+        //写入文件
+        FileUtil.writeToFile(fiePath, filename, content);
+        
+        System.err.println(content);
+        
+        return null;
+    }
+
+    public static String getCsvContent(Collection objs)
+    {
         String content = "";
         boolean isHave = false;
         for (Object obj : objs)
@@ -30,15 +48,7 @@ public class CsvUtil
             
             content = content + StringUtils.join(row, ",") + "\r\n";
         }
-        
-        filename = filename + "_" + DateUtil.getNowDate() + ".csv";
-        
-        //写入文件
-        FileUtil.writeToFile(fiePath, filename, content);
-        
-        System.err.println(content);
-        
-        return null;
+        return content;
     }
     
     //第一列为字段名称
@@ -112,5 +122,7 @@ public class CsvUtil
        System.out.print("1,2,,,d,".split(",").length);
         
     }
+
+
     
 }
