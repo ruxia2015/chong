@@ -4,9 +4,9 @@ public class PageBean
 {
     private int pageSize = 20;
     
-    private int startIndex = 1;
+    private int startLimit = 1;
     
-    private int endIndex = 20;
+    private int endLimit = 20;
     
     private int currentPage = 1;
     
@@ -21,25 +21,25 @@ public class PageBean
     
     private void countPageParam()
     {
-        //        this.pageSize = _pageSize;
-        //        this.currentPage = _currentPage;
-        //        this.totalSize = _totalSize;
-        
+
         totalPage = (int) Math.ceil(this.totalSize / this.pageSize);        
-        startIndex = pageSize * (currentPage - 1);
-        endIndex = pageSize * currentPage;
+        startLimit = pageSize * (currentPage - 1);
+        endLimit = pageSize * currentPage;
     }
     
-    public int getStartIndex()
+   
+
+    
+    public int getStartLimit()
     {
-        return startIndex;
+        return startLimit;
     }
-    
-    public int getEndIndex()
+
+    public int getEndLimit()
     {
-        return endIndex;
+        return endLimit;
     }
-    
+
     public int getCurrentPage()
     {
         return currentPage;

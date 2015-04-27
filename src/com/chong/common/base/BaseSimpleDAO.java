@@ -12,24 +12,70 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
 {
     private SimpleSQLTemplate<T> generatorSimpleSQLTemplate = new SimpleSQLTemplate<T>();
     
-    public List<T> queryList(T bean)
+    public int count(T bean)
     {
-
-      String sql =  generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(), bean, getBeanClass());
-      
+        
+        String sql = generatorSimpleSQLTemplate.generatorCountSQL(getTableName(),
+                bean,
+                getBeanClass());
+        
+        Integer cnt = null;
+        
         try
         {
-            if(!StringTools.isEmptyOrNone(sql)){
+            if (!StringTools.isEmptyOrNone(sql))
+            {
                 
-            ResultSet resultSet = getStatement().executeQuery(sql);
-            return ResultSetHandler.resultSetToList(resultSet, getBeanClass());
+                ResultSet resultSet = getStatement().executeQuery(sql);
+                
+                Object obj = resultSet.getObject(1);
+                if (obj == null)
+                {
+                    return 0;
+                }
+                
+                cnt = Integer.parseInt(obj.toString());
+                
             }
         }
         catch (SQLException e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return cnt == null ? 0 : cnt;
+        
+    }
+    
+    public List<T> queryList(T bean)
+    {
+        
+        String sql = generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(),
+                bean,
+                getBeanClass());
+        
+        try
+        {
+            if (!StringTools.isEmptyOrNone(sql))
+            {
+                
+                ResultSet resultSet = getStatement().executeQuery(sql);
+                return ResultSetHandler.resultSetToList(resultSet,
+                        getBeanClass());
+            }
+        }
+        catch (SQLException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
         
@@ -39,22 +85,27 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
     
     public T findBean(T t)
     {
-        String sql =  generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(), t, getBeanClass());
+        String sql = generatorSimpleSQLTemplate.generatorQuerySQL(getTableName(),
+                t,
+                getBeanClass());
         
-       List<T> ts =queryList(t);
-       if(ts!=null && ts.size()>0){
-           return ts.get(0);
-       }
+        List<T> ts = queryList(t);
+        if (ts != null && ts.size() > 0)
+        {
+            return ts.get(0);
+        }
         
         return null;
     }
     
     public int updateBean(T t)
     {
-        String sql =  generatorSimpleSQLTemplate.generatorUpdateSQL(getTableName(), t, getBeanClass());
+        String sql = generatorSimpleSQLTemplate.generatorUpdateSQL(getTableName(),
+                t,
+                getBeanClass());
         try
         {
-            return  getStatement().executeUpdate(sql);
+            return getStatement().executeUpdate(sql);
         }
         catch (SQLException e)
         {
@@ -66,11 +117,13 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
     
     public int addBean(T t)
     {
-        String sql =  generatorSimpleSQLTemplate.generatorAddSQL(getTableName(), t, getBeanClass());
+        String sql = generatorSimpleSQLTemplate.generatorAddSQL(getTableName(),
+                t,
+                getBeanClass());
         
         try
         {
-            return  getStatement().executeUpdate(sql);
+            return getStatement().executeUpdate(sql);
         }
         catch (SQLException e)
         {
@@ -81,14 +134,16 @@ public abstract class BaseSimpleDAO<T> extends BaseDAO<T>
     
     public int deleteBean(T t)
     {
-        String sql =  generatorSimpleSQLTemplate.generatorDeleteSQL(getTableName(), t, getBeanClass());
+        String sql = generatorSimpleSQLTemplate.generatorDeleteSQL(getTableName(),
+                t,
+                getBeanClass());
         try
         {
-            return  getStatement().executeUpdate(sql);
+            return getStatement().executeUpdate(sql);
         }
         catch (SQLException e)
         {
-          
+            
             e.printStackTrace();
         }
         return 0;

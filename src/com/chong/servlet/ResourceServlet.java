@@ -1,7 +1,13 @@
 package com.chong.servlet;
 
+import java.io.BufferedOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +16,8 @@ import com.chong.DAO.ResourceTypeDAO;
 import com.chong.bean.ResourceBean;
 import com.chong.bean.ResourceTypeBean;
 import com.chong.common.base.BaseServlet;
+import com.chong.common.util.CsvUtil;
+import com.chong.common.util.DateUtil;
 import com.chong.common.util.StringTools;
 
 public class ResourceServlet extends BaseServlet
@@ -22,13 +30,79 @@ public class ResourceServlet extends BaseServlet
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
             throws Exception
     {
-        ResourceBean bean = new ResourceBean();
+        ResourceTypeBean bean = new ResourceTypeBean();
         
-        List<ResourceBean> beans = resourceDAO.queryList(bean);
+        List<ResourceTypeBean> beans = resourceTypeDAO.queryList(bean);
         
-        req.setAttribute("resourceList", beans);
+        req.setAttribute("resourceTypeList", beans);
         
         req.getRequestDispatcher("/queryResource.jsp").forward(req, resp);
+        
+    }
+    
+    protected void export(HttpServletRequest req, HttpServletResponse resp)
+    {
+        Map<String,String> typeMap = resourceTypeDAO.queryMap(new ResourceTypeBean());        
+        
+        
+        String domain = (String)req.getParameter("domain");
+        String type = (String)req.getParameter("type");
+        ResourceBean bean = new ResourceBean();
+        
+        bean.setDomain(domain);
+        bean.setType(type);
+        List<ResourceBean> beans = resourceDAO.queryList(bean);
+        
+        for(int i=0;i<beans.size();i++){
+            ResourceBean tempBean = beans.get(i);
+            tempBean.setType(typeMap.get(tempBean.getType()));
+            beans.set(i, tempBean);
+        }
+        
+        resp.setContentType("text/plain");
+        String fileName = null;
+        try
+        {
+            fileName = URLEncoder.encode("资源导出", "UTF-8");
+            
+            fileName = fileName +"_" +DateUtil.now();
+        }
+        catch (UnsupportedEncodingException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        resp.setHeader("Content-Disposition", "attachment; filename="
+                + fileName + ".csv");
+        
+        BufferedOutputStream buff = null;
+        String content = CsvUtil.getCsvContent(beans);
+        ServletOutputStream outSTr = null;
+        try
+        {
+            outSTr = resp.getOutputStream(); // 建立       
+            buff = new BufferedOutputStream(outSTr);
+            
+            buff.write(content.toString().getBytes());
+            buff.flush();
+            buff.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                buff.close();
+                outSTr.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
         
     }
     
@@ -64,6 +138,7 @@ public class ResourceServlet extends BaseServlet
                {
                    continue;
                }
+               str = str.trim();
                
                //是否存在
                ResourceBean resourceBean = new ResourceBean();
@@ -134,6 +209,8 @@ public class ResourceServlet extends BaseServlet
         return domain;
         
     }
+    
+    
     
     public static void main(String[] args)
     {

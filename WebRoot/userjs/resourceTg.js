@@ -8,11 +8,12 @@ $(function() {
 						url : _contextPath+"/ResourceTgAjaxServlet?tgId=" + tgId,// 加载的URL
 						isField : "id",
 						pagination : true,// 显示分页
-						pageSize : 5,// 分页大小
+						pageSize : 10,// 分页大小
 						pageList : [ 5, 10, 15, 20 ],// 每页的个数
 						fit : true,// 自动补全
 						fitColumns : true,
-						iconCls : "icon-save",// 图标
+						singleSelect:true,
+//						iconCls : "icon-save",// 图标
 						title : "推广网站资源管理",
 						columns : [ [ // 每个列具体内容
 								{
@@ -59,7 +60,7 @@ $(function() {
 
 								}, {
 									field : 'account',
-									title : '资源账号',
+									title : '账号',
 									width : 100,
 									editor : {
 										type : 'validatebox',
@@ -69,7 +70,7 @@ $(function() {
 									}
 								}, {
 									field : 'password',
-									title : '资源密码',
+									title : '密码',
 									width : 100,
 									editor : {
 										type : 'validatebox'
@@ -77,7 +78,7 @@ $(function() {
 									}
 								}, {
 									field : 'email',
-									title : '资源邮箱',
+									title : '邮箱',
 									width : 100,
 									editor : {
 										type : 'validatebox'
@@ -186,12 +187,7 @@ $(function() {
 										}
 									}
 								},
-								{
-									text : "查询",
-									iconCls : "icon-search",
-									handler : function() {
-									}
-								},
+
 								{
 									text : "保存",
 									iconCls : "icon-save",
@@ -200,21 +196,15 @@ $(function() {
 										datagrid.datagrid('endEdit', rowEditor);
 										rowEditor = undefined;
 									}
-								}, {
+								}, 
+								{
 									text : "取消编辑",
 									iconCls : "icon-redo",
 									handler : function() {
 										rowEditor = undefined;
 										datagrid.datagrid('rejectChanges')
 									}
-								} , {
-									text : "导出",
-									iconCls : "icon-save",
-									handler : function() {
-										url = _contextPath+'/ResourceTgAjaxServlet/m/export.action';
-											window.open(url);
-									}
-								} ],
+								}  ],
 						onAfterEdit : function(rowIndex, rowData, changes) {
 							var inserted = datagrid.datagrid('getChanges',
 									'inserted');
@@ -272,11 +262,43 @@ $(function() {
 
 						}
 					});
-	$("#search").click(function() {
-		datagrid.datagrid('load', {
-			text : $("#text").val()
+	
+	
+	function pagerFilter(data){
+		if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
+			data = {
+				total: data.length,
+				rows: data
+			}
+		}
+		var dg = $(this);
+		var opts = dg.datagrid('options');
+		var pager = dg.datagrid('getPager');
+		pager.pagination({
+	        beforePageText: '第',//页数文本框前显示的汉字 
+	        afterPageText: '页    共 {pages} 页', 
+	        displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录', 
+			onSelectPage:function(pageNum, pageSize){
+				opts.pageNumber = pageNum;
+				opts.pageSize = pageSize;
+				pager.pagination('refresh',{
+					pageNumber:pageNum,
+					pageSize:pageSize
+				});
+				dg.datagrid('loadData',data);
+			}
 		});
-
+		if (!data.originalRows){
+			data.originalRows = (data.rows);
+		}
+		var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+		var end = start + parseInt(opts.pageSize);
+		data.rows = (data.originalRows.slice(start, end));
+		return data;
+	}
+	
+	$(function(){
+		$('#dg').datagrid({loadFilter:pagerFilter})	;
 	});
 
 })

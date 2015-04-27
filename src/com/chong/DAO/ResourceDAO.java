@@ -1,9 +1,9 @@
 package com.chong.DAO;
 
 import com.chong.bean.ResourceBean;
-import com.chong.common.base.BaseSimpleDAO;
+import com.chong.common.base.BasePagingDAO;
 
-public class ResourceDAO extends BaseSimpleDAO<ResourceBean>
+public class ResourceDAO extends BasePagingDAO<ResourceBean>
 {
 
     @Override

@@ -44,7 +44,13 @@ public class CsvUtil
             }
             List row = ExportHeaderAnnotationUtil.getContent(obj);
             
-            content = content + StringUtils.join(row, ",") + "\r\n";
+            String rowC = "";
+            if(row!=null && row.size()>0){
+                rowC = StringUtils.join(row, ",").replace("\r", "").replace("\n", "");                
+            }
+            
+            
+            content = content + rowC + "\r\n";
         }
         return content;
     }

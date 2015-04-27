@@ -10,12 +10,15 @@
 			url:_contextPath+"/ResourceAjaxServlet",//加载的URL
 		    isField:"id",
 			pagination:true,//显示分页
-			pageSize:5,//分页大小
+			pageSize:10,//分页大小
 			pageList:[5,10,15,20],//每页的个数
 			fit:true,//自动补全
 			fitColumns:true,
-			iconCls:"icon-save",//图标
+			singleSelect:true,
+//			iconCls:"icon-save",//图标
 			title:"资源管理",
+			queryParams: {				
+			},
 			columns:[[      //每个列具体内容
 		              {
 		            	  field:'id',
@@ -46,7 +49,12 @@
 								valueField:'id',textField:'name',
 								url:_contextPath+"/ResourceTypeAjaxServlet"
 							}
-						}},  
+						}/*,formatter : function(value, rec) {
+							
+
+						}		*/		
+						
+						},  
 						{field:'accessState',title:'accessState',width:100,editor : {
 							type : 'combobox',
 							options : {
@@ -176,7 +184,9 @@
 							}
 			        	}
 			        }},
-			        {text:"查询",iconCls:"icon-search",handler:function(){}},
+//			        {text:"查询",iconCls:"icon-search",handler:function(){
+//			        	
+//			        }},
 			        {text:"保存",iconCls:"icon-save",handler:function(){
 			        	
 			        	datagrid.datagrid('endEdit',rowEditor);
@@ -186,6 +196,8 @@
 			        	rowEditor=undefined;
 			        	datagrid.datagrid('rejectChanges')
 			        }}
+			      
+			        
 			        ],
 			onAfterEdit:function(rowIndex, rowData, changes){
 				var inserted = datagrid.datagrid('getChanges', 'inserted');
@@ -243,4 +255,45 @@
 
 		});
 		
+
+		
+		function pagerFilter(data){
+			if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
+				data = {
+					total: data.length,
+					rows: data
+				}
+			}
+			var dg = $(this);
+			var opts = dg.datagrid('options');
+			var pager = dg.datagrid('getPager');
+			pager.pagination({
+		        beforePageText: '第',//页数文本框前显示的汉字 
+		        afterPageText: '页    共 {pages} 页', 
+		        displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录', 
+				onSelectPage:function(pageNum, pageSize){
+					opts.pageNumber = pageNum;
+					opts.pageSize = pageSize;
+					pager.pagination('refresh',{
+						pageNumber:pageNum,
+						pageSize:pageSize
+					});
+					dg.datagrid('loadData',data);
+				}
+			});
+			if (!data.originalRows){
+				data.originalRows = (data.rows);
+			}
+			var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+			var end = start + parseInt(opts.pageSize);
+			data.rows = (data.originalRows.slice(start, end));
+			return data;
+		}
+		
+		$(function(){
+			$('#dg').datagrid({loadFilter:pagerFilter})	;
+		});
+		
+
+	
 	})

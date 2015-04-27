@@ -130,12 +130,13 @@ public class ExportHeaderAnnotationUtil
                     if (str != null && str.length > 0 && values != null
                             && values.length > 0)
                     {
-                        for (int i = 0; i < str.length; i++)
+                        for (int i = 0; i < str.length && i<values.length; i++)
                         {
-                            if (values.length < i + 1)
-                            {
-                                break;
+                            if(col==null){
+                                col = "";
                             }
+                            
+                            
                             if (str[i].equals(col))
                             {
                                 col = values[i];

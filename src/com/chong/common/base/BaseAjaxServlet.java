@@ -2,6 +2,7 @@ package com.chong.common.base;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,9 @@ public abstract class BaseAjaxServlet extends BaseServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
+        
+        Map<String, Object> param = req.getParameterMap();
+        
 
 
     	try {

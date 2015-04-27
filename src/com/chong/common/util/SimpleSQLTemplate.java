@@ -65,6 +65,38 @@ public class SimpleSQLTemplate<T> {
 
 	}
 
+	public String generatorCountSQL(String tableName, T t, Class clazz) {
+        Map<String, Object> map = getObjectValue(t, clazz);
+        Map<String, Field> fMap = getFieldMap(clazz);
+
+        StringBuffer sb = new StringBuffer();
+        String where = "";
+        String columns = "";
+        for (String key : map.keySet()) {
+            Field f = fMap.get(key);
+            f.setAccessible(true);
+            SQLAnnotation annotation = (SQLAnnotation) f
+                    .getAnnotation(SQLAnnotation.class);
+
+            columns = columns + key + ",";
+            String val = (String) map.get(key);
+            if (!StringTools.isEmptyOrNone(val)) {
+                where = where + getWhere(val, annotation, key);
+            }
+        }
+
+        if (StringTools.isEmptyOrNone(columns)) {
+            return null;
+        } else {
+            columns = columns.substring(0, columns.length() - 1);
+            sb.append("select count(1) as cnt from " + tableName);
+            sb.append(" WHERE 1 = 1 " + where);
+        }
+
+        System.out.println("生成的count语句 ==> " + sb.toString());
+        return sb.toString();
+    }
+	
 	public String generatorQuerySQL(String tableName, T t, Class clazz) {
 		Map<String, Object> map = getObjectValue(t, clazz);
 		Map<String, Field> fMap = getFieldMap(clazz);

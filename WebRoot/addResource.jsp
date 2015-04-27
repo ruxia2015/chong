@@ -25,7 +25,7 @@
 	    		<tr>
 	    			<td>资源类型:</td>
 	    			<td>
-	    				<select class="easyui-combobox" name="resourceType">
+	    				<select class="easyui-combobox" name="resourceType" panelHeight="auto">
 	    					<option value="">==请选择==</option>
 	    					<c:forEach items="${resourceTypes }" var="item">
 	    						<option value="${item.id }">${item.name}</option>

@@ -46,7 +46,7 @@ public abstract class BaseServlet extends HttpServlet
             
             for (String key : param.keySet())
             {
-            	System.out.println(param.get(key));
+            	System.out.println("===> " +key + "    " +param.get(key));
                 req.setAttribute(key, req.getParameter(key));
             }
             

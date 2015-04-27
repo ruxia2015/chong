@@ -12,7 +12,6 @@ public class ResourceTgBean {
 	private String id;
 
 	
-	@SQLAnnotation(is_Ingore=true)
 	private String tgId;
 
 	@ExportHeaderAnnotation(headerName="资源ID")
@@ -28,6 +27,7 @@ public class ResourceTgBean {
 	private String email;
 
 	@ExportHeaderAnnotation(headerName="推广的站")
+	@SQLAnnotation(is_Ingore=true)
 	private String tgDomain;
 
 	@SQLAnnotation(is_column = false, where_oper = "in", where_column = "resourceId")

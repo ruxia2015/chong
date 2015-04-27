@@ -2,6 +2,7 @@ package com.chong.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,8 +23,17 @@ public class ResourceAjaxServlet extends BaseAjaxServlet
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
     {
+
+        
+        String domain = (String)req.getParameter("domain");
+        String type = (String)req.getParameter("type");
+        
+        System.out.println("domain  " +domain);
+        
         ResourceBean bean = new ResourceBean();
         
+        bean.setDomain(domain);
+        bean.setType(type);
         List<ResourceBean> beans = resourceDAO.queryList(bean);
         
         try {
@@ -34,6 +44,7 @@ public class ResourceAjaxServlet extends BaseAjaxServlet
 		}      
         
     }
+    
     
     public void add(HttpServletRequest req, HttpServletResponse resp){
     	String objJson = (req.getParameter("bean"));    	

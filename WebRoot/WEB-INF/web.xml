@@ -6,7 +6,7 @@
 	
 	<filter>
   <filter-name>setCharacterEncoding</filter-name>
-  <filter-class>common.EncodingFilter</filter-class>
+  <filter-class>com.chong.common.util.EncodingFilter</filter-class>
   <init-param>
      <param-name>encoding</param-name>
      <param-value>UTF-8</param-value>
@@ -21,7 +21,7 @@
 
 	<servlet>
 		<servlet-name>ResourceTypeServlet</servlet-name>
-		<servlet-class>servlet.ResourceTypeServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceTypeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceTypeServlet</servlet-name>
@@ -34,7 +34,7 @@
 
 	<servlet>
 		<servlet-name>ResourceTypeAjaxServlet</servlet-name>
-		<servlet-class>servlet.ResourceTypeAjaxServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceTypeAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceTypeAjaxServlet</servlet-name>
@@ -48,7 +48,7 @@
 
 	<servlet>
 		<servlet-name>ResourceAjaxServlet</servlet-name>
-		<servlet-class>servlet.ResourceAjaxServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceAjaxServlet</servlet-name>
@@ -62,7 +62,7 @@
 
 	<servlet>
 		<servlet-name>ResourceServlet</servlet-name>
-		<servlet-class>servlet.ResourceServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceServlet</servlet-name>
@@ -76,7 +76,7 @@
 	
 	<servlet>
 		<servlet-name>TgAjaxServlet</servlet-name>
-		<servlet-class>servlet.TgAjaxServlet</servlet-class>
+		<servlet-class>com.chong.servlet.TgAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>TgAjaxServlet</servlet-name>
@@ -90,7 +90,7 @@
 
 	<servlet>
 		<servlet-name>TgServlet</servlet-name>
-		<servlet-class>servlet.TgServlet</servlet-class>
+		<servlet-class>com.chong.servlet.TgServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>TgServlet</servlet-name>
@@ -104,7 +104,7 @@
 	
 	<servlet>
 		<servlet-name>ResourceTgAjaxServlet</servlet-name>
-		<servlet-class>servlet.ResourceTgAjaxServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceTgAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceTgAjaxServlet</servlet-name>
@@ -118,7 +118,7 @@
 
 	<servlet>
 		<servlet-name>ResourceTgServlet</servlet-name>
-		<servlet-class>servlet.ResourceTgServlet</servlet-class>
+		<servlet-class>com.chong.servlet.ResourceTgServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ResourceTgServlet</servlet-name>
