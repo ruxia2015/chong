@@ -16,13 +16,14 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import common.JacksonUtil;
-
 import route.RouterConstant;
 import route.performance.core.Connection;
 import route.performance.core.ConnectionManager;
 import route.performance.core.MessageHandler;
 import route.performance.core.RouterRequest;
+
+import com.chong.common.util.JacksonUtil;
+
 import content.StringTools;
 
 /**

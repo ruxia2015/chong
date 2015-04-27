@@ -28,7 +28,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
-import bean.DigestData;
 import content.DigestAuthUtils;
 import content.KeyUtil;
 

@@ -14,9 +14,9 @@
 <div style="float:left;width:260px;">
 	<jsp:include page="left.jsp"/>
 </div>
-${tgId }==========
- <div style="float:left;width:auto;border:1px solid #95B8E7;min-width:800px;">
-	<div class="easyui-tabs" style="height:1050px;min-width:1000px;max-width:1000px;" id="tgTabs"></div>
- </div>
+
+
+<div class="easyui-tabs" style="height:800px;width:1080px;overflow:hidden;float:left" id="tgTabs"></div>
+
 </body>
 </html>

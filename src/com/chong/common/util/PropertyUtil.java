@@ -8,7 +8,7 @@
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package content;
+package com.chong.common.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +17,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import content.StringUtil;
 
 /**
  * 读取配置文件/config/config.properties的工具类

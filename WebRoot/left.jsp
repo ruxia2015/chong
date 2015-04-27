@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			}else{
    		    	$('#tgTabs').tabs('add',{
    					title: name,
-   					content: '<iframe width="100%" height="100%" src="'+url+'"/>',
+   					content: '<iframe width="97%" height="95%" src="'+url+'"/>',
    					closable: true
    				});
    			}

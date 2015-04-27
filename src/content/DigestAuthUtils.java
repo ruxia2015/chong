@@ -13,8 +13,6 @@ package content;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import bean.DigestData;
-
 /**
  * <一句话功能简述> <功能详细描述>
  * 

@@ -19,8 +19,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import route.RouterConstant;
-
 /**
  * 长连接对象
  * <功能详细描述>

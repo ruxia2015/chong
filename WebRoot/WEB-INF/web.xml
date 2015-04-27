@@ -142,6 +142,6 @@
 
 
 	<welcome-file-list>
-		<welcome-file>add.jsp</welcome-file>
+		<welcome-file>queryTgResourceMain.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
