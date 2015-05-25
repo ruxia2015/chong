@@ -1,16 +1,5 @@
-/DAO
-/annotation
-/base
-/bean
-/common
-/config.properties
 /content
-/jdbc
-/jdbcConfig.properties
-/log4j.properties
 /perfortest
 /route
-/servlet
-/util
-/service
 /com
+/util

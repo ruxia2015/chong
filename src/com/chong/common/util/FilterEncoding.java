@@ -1,4 +1,4 @@
-package content;
+package com.chong.common.util;
 
 import java.io.IOException;
 

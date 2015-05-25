@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import content.StringUtil;
-
 /**
  * 读取配置文件/config/config.properties的工具类
  * 
@@ -92,7 +90,7 @@ public class PropertyUtil
         }
         String perperties = props.getProperty(name);
         String[] valueArray = null;
-        if (!StringUtil.isEmpty(perperties))
+        if (!StringTools.isEmptyOrNone(perperties))
         {
             valueArray = perperties.split(",");
         }
@@ -163,19 +161,19 @@ public class PropertyUtil
             return codeDes;
         }
         
-        if (!StringUtil.isEmpty(url))
+        if (!StringTools.isEmptyOrNone(url))
         {
             // 修改url的属性值 
             prop.setProperty("url", url);
         }
         
-        if (!StringUtil.isEmpty(uri))
+        if (!StringTools.isEmptyOrNone(uri))
         {
             // 修改uri的属性值 
             prop.setProperty("uri", uri);
         }
         
-        if (!StringUtil.isEmpty(message))
+        if (!StringTools.isEmptyOrNone(message))
         {
             // 修改message的属性值 
             prop.setProperty("message", message);
@@ -186,19 +184,19 @@ public class PropertyUtil
         {
             prop.setProperty("expectEntity", "");
         }
-        else if (!StringUtil.isEmpty(expectEntity))
+        else if (!StringTools.isEmptyOrNone(expectEntity))
         {
             // 修改expectEntity的属性值 
             prop.setProperty("expectEntity", expectEntity);
         }
         
-        if (!StringUtil.isEmpty(canDelete))
+        if (!StringTools.isEmptyOrNone(canDelete))
         {
             // 修改canDelete的属性值 
             prop.setProperty("canDelete", canDelete);
         }
                 
-                if (!StringUtil.isEmpty(remark))
+                if (!StringTools.isEmptyOrNone(remark))
                 {
                     // 修改remark的属性值 
                     prop.setProperty("remark", remark);
@@ -275,7 +273,7 @@ public class PropertyUtil
         // 修改message的属性值 
         prop.setProperty("messageType", messageType);
         
-        if (!StringUtil.isEmpty(expectEntity))
+        if (!StringTools.isEmptyOrNone(expectEntity))
         {
             //预期消息
             prop.setProperty("expectEntity", expectEntity);
