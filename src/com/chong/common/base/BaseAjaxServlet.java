@@ -18,18 +18,20 @@ public abstract class BaseAjaxServlet extends BaseServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
-    {
+    { 
+        String returnJson = (String)req.getAttribute("json");
         String msg = "成功！";
         
         Map<String, Object> param = req.getParameterMap();
         
-
-
     	try {
     	    Object result = executeMethod(req, resp);
 		
-    	    if(result!=null && "String".equals(result.getClass())){
-    	        
+    	    if(result!=null && "String".equals(result.getClass().getSimpleName())){
+    	        AjaxJsonBean jsonBean = new AjaxJsonBean();
+                jsonBean.setSuccessCode("1");
+                jsonBean.setMsg((String)result);            
+                returnJson = JacksonUtil.objToJson(jsonBean);
     	    }
     	    
 		} catch (Exception e1) {
@@ -37,6 +39,9 @@ public abstract class BaseAjaxServlet extends BaseServlet
 			e1.printStackTrace();
 		}        
         String json = (String)req.getAttribute("json");
+        if(StringTools.isEmptyOrNone(json)){
+            json = returnJson;
+        }
         if(StringTools.isEmptyOrNone(json)){
             AjaxJsonBean jsonBean = new AjaxJsonBean();
             jsonBean.setSuccessCode("0");

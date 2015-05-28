@@ -86,16 +86,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <p> <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a></p>	
 		  <p> <a href="<%=request.getContextPath() %>/CategoryServlet">资源分类</a></p>				   
 		</div>
-		<div title="资源管理" style="padding:10px;" >
-			<p><a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a></p>
-			<p><a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a></p>
-		</div>
 		<div title="推广网站管理" style="padding:10px;">
 			<p><a href="<%=request.getContextPath() %>/TgServlet/m/toAdd.action">添加推广网站</a></p>
 			<p><a href="<%=request.getContextPath() %>/TgServlet">推广网站管理</a></p>
 		</div>
+		<div title="资源管理" style="padding:10px;" >
+			<p><a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a></p>
+			<p><a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a></p>
+		</div>
 		<div title="资源账号管理" style="padding:10px;" data-options="selected:true" id="tgs">
-
 		</div>
 
 	</div>

@@ -25,15 +25,14 @@ public class ResourceTgAjaxServlet extends BaseAjaxServlet
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
     {
-        //    	 List<ResourceTgBean> rsBean = new ArrayList<ResourceTgBean>();
         
         ResourceBean resourceBean = new ResourceBean();
-        String tgId =req.getParameter("tgId");    
-        Collection<ResourceTgBean> beans = resourceTgService.queryResourceTgList(tgId, resourceBean);
+        String tgId = req.getParameter("tgId");
+        Collection<ResourceTgBean> beans = resourceTgService.queryResourceTgList(tgId,
+                resourceBean);
         
         try
         {
-            //        	System.out.println( JacksonUtil.objToJson(ajaxJsonBean));
             req.setAttribute("json", JacksonUtil.objToJson(beans));
         }
         catch (IOException e)
@@ -45,59 +44,31 @@ public class ResourceTgAjaxServlet extends BaseAjaxServlet
     }
     
     public void add(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
     {
         String objJson = (req.getParameter("bean"));
         
         System.out.println("bean==>" + objJson);
         
-        ResourceTgBean bean;
-        try
+        ResourceTgBean bean = (ResourceTgBean) JacksonUtil.jsonToObj(objJson,
+                ResourceTgBean.class);
+        
+        String tgId = req.getParameter("tgId");
+        bean.setTgId(tgId);
+        
+        if (StringTools.isEmptyOrNone(bean.getId()))
         {
-            bean = (ResourceTgBean) JacksonUtil.jsonToObj(objJson,
-                    ResourceTgBean.class);
-            
-            String tgId = req.getParameter("tgId");
-            bean.setTgId(tgId);
-            
-            if (StringTools.isEmptyOrNone(bean.getId()))
-            {
-                tgDAO.addBean(bean);
-            }
-            else
-            {
-                tgDAO.updateBean(bean);
-            }
-            
+            tgDAO.addBean(bean);
         }
-        catch (JsonParseException e)
+        else
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (JsonMappingException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (InstantiationException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            tgDAO.updateBean(bean);
         }
         
     }
     
     public void update(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
     {
         add(req, resp);
         

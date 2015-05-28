@@ -13,6 +13,7 @@ import com.chong.bean.ResourceTypeBean;
 import com.chong.common.base.BaseAjaxServlet;
 import com.chong.common.base.bean.AjaxJsonBean;
 import com.chong.common.util.JacksonUtil;
+import com.chong.common.util.StringTools;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -41,79 +42,47 @@ public class ResourceTypeAjaxServlet extends BaseAjaxServlet
         
     }
     
-    public void add(HttpServletRequest req, HttpServletResponse resp)
+    public String add(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
     {
         String objJson = (req.getParameter("bean"));
         ResourceTypeBean bean;
-        try
+        
+        if (StringTools.isEmptyOrNone(objJson))
         {
-            bean = (ResourceTypeBean) JacksonUtil.jsonToObj(objJson,
-                    ResourceTypeBean.class);
+            return "无数据，不能添加";
+        }
+        
+        //获取添加的数据
+        bean = (ResourceTypeBean) JacksonUtil.jsonToObj(objJson,
+                ResourceTypeBean.class);
+        
+        //查询是否存在
+        ResourceTypeBean typeBeanQ = new ResourceTypeBean();
+        typeBeanQ.setName(bean.getName());
+        typeBeanQ = resourceTypeDAO.findBean(typeBeanQ);
+        if (typeBeanQ != null)
+        {
+            return "已经存在,添加失败！";
+        }
+        else
+        {
             resourceTypeDAO.addBean(bean);
         }
-        catch (JsonParseException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (JsonMappingException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (InstantiationException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+        return null;
         
     }
     
     public boolean update(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
     {
         String objJson = (req.getParameter("bean"));
         ResourceTypeBean bean;
-        try
-        {
-            bean = (ResourceTypeBean) JacksonUtil.jsonToObj(objJson,
-                    ResourceTypeBean.class);
-            resourceTypeDAO.updateBean(bean);
-        }
-        catch (JsonParseException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (JsonMappingException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (InstantiationException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+        bean = (ResourceTypeBean) JacksonUtil.jsonToObj(objJson,
+                ResourceTypeBean.class);
+        resourceTypeDAO.updateBean(bean);
         
         return true;
         
@@ -138,7 +107,7 @@ public class ResourceTypeAjaxServlet extends BaseAjaxServlet
         {
             AjaxJsonBean jsonBean = new AjaxJsonBean();
             jsonBean.setSuccessCode("1");
-            jsonBean.setMsg("正在使用，不可以刪除");            
+            jsonBean.setMsg("正在使用，不可以刪除");
             String json;
             try
             {

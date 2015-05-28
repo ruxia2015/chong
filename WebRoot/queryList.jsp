@@ -17,7 +17,7 @@
 </div>
 <div style="float:left;width:auto;border:0px solid #95B8E7;min-width:800px;">
 
-<table id="dg" class="easyui-datagrid" title="管理" style="width:900px;height:1200px;">
+<table id="dg" class="easyui-datagrid" title="管理" style="width:900px;height:900px;">
 	</table>
 
 	</div>

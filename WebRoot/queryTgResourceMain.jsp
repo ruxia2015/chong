@@ -26,7 +26,7 @@
 </script>
 
 </head>
-<body>
+<body onload="init();">
 <jsp:include page="top.jsp"/>
 <div style="float:left;width:260px;">
 	<jsp:include page="left.jsp"/>

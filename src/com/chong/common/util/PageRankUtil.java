@@ -53,7 +53,7 @@ public class PageRankUtil
     {
         long start = System.currentTimeMillis();
         PageRankUtil prService = new PageRankUtil();
-        String domain = "http://www.baidu.com";
+        String domain = "baidu.com";
         if (args.length > 0)
         {
             domain = args[0];

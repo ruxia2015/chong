@@ -21,45 +21,38 @@ public class WebsitRpThread implements Runnable
             try
             {
                 ResourceBean resourceBeanQ = new ResourceBean();
-                resourceBeanQ.setPr("-1");
+               // resourceBeanQ.setPr("0");
                 
                 List<ResourceBean> beans = resourceDAO.queryList(resourceBeanQ);
                 if (beans == null || beans.size() == 0)
                 {
-                    Thread.sleep(1000 * 60);
+                    Thread.sleep(autoRunConfig.sleeptime);
                 }
                 else
                 {
+                    System.out.println("等待查询PR值的个数 ===>" + beans.size());
                     for (ResourceBean tempBean : beans)
                     {
-                        if (StringTools.isEmptyOrNone(tempBean.getPr())
-                                || tempBean.getPr().equals("0"))
+                      if (StringTools.isEmptyOrNone(tempBean.getPr()) ||  Integer.valueOf(tempBean.getPr()) < 1 )
                         {
                             String domain = tempBean.getDomain();
+                            domain =domain;
                             int pr = PageRankUtil.getPR(domain);
-                            System.out.println(domain + "的pr值" + pr);
+                            System.out.println(domain + " 的pr值 " + pr);
                             tempBean.setPr(pr + "");
                             resourceDAO.updateBean(tempBean);
-                            
+                            Thread.sleep(1000*60);
                         }
                         
                     }
                     
                 }
                 
+                Thread.sleep(autoRunConfig.sleeptime);
             }
             catch (Exception e)
             {
                 
-            }
-            try
-            {
-                Thread.sleep(1000 * 60 * 60L);
-            }
-            catch (InterruptedException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
         }
         

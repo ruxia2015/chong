@@ -18,17 +18,14 @@ public class ResourceAjaxServlet extends BaseAjaxServlet
 {
     private ResourceDAO resourceDAO = new ResourceDAO();
     
-
-    
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
     {
-
         
-        String domain = (String)req.getParameter("domain");
-        String type = (String)req.getParameter("type");
+        String domain = (String) req.getParameter("domain");
+        String type = (String) req.getParameter("type");
         
-        System.out.println("domain  " +domain);
+        System.out.println("domain  " + domain);
         
         ResourceBean bean = new ResourceBean();
         
@@ -36,75 +33,47 @@ public class ResourceAjaxServlet extends BaseAjaxServlet
         bean.setType(type);
         List<ResourceBean> beans = resourceDAO.queryList(bean);
         
-        try {
-			req.setAttribute("json", JacksonUtil.objToJson(beans));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}      
+        try
+        {
+            req.setAttribute("json", JacksonUtil.objToJson(beans));
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
     }
     
-    
-    public void add(HttpServletRequest req, HttpServletResponse resp){
-    	String objJson = (req.getParameter("bean"));    	
-    	ResourceBean resourceBean;
-		try {
-			resourceBean = (ResourceBean)JacksonUtil.jsonToObj(objJson, ResourceBean.class);
-			resourceDAO.addBean(resourceBean);
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
+    public void add(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
+    {
+        String objJson = (req.getParameter("bean"));
+        ResourceBean resourceBean = (ResourceBean) JacksonUtil.jsonToObj(objJson,
+                ResourceBean.class);
+        resourceDAO.addBean(resourceBean);
+        
     }
     
-    public void update(HttpServletRequest req, HttpServletResponse resp){
-    	String objJson = (req.getParameter("bean"));    	
-    	System.out.println("========="+objJson);
-    	
-    	ResourceBean resourceBean;
-		try {
-			resourceBean = (ResourceBean)JacksonUtil.jsonToObj(objJson, ResourceBean.class);
-			resourceDAO.updateBean(resourceBean);
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
+    public void update(HttpServletRequest req, HttpServletResponse resp)
+            throws Exception
+    {
+        String objJson = (req.getParameter("bean"));
+        System.out.println("=========" + objJson);
+        
+        ResourceBean resourceBean = (ResourceBean) JacksonUtil.jsonToObj(objJson,
+                ResourceBean.class);
+        resourceDAO.updateBean(resourceBean);
+        
     }
     
-    
-    public void delete(HttpServletRequest req, HttpServletResponse resp){
-    	String id = req.getParameter("id");
-    	
-    	ResourceBean ResourceBean = new ResourceBean();
-    	ResourceBean.setId(id);
-    	resourceDAO.deleteBean(ResourceBean);
+    public void delete(HttpServletRequest req, HttpServletResponse resp)
+    {
+        String id = req.getParameter("id");
+        
+        ResourceBean ResourceBean = new ResourceBean();
+        ResourceBean.setId(id);
+        resourceDAO.deleteBean(ResourceBean);
     }
     
 }

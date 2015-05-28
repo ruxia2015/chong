@@ -75,7 +75,14 @@ public class TgServlet extends BaseServlet
                 str = str.trim();
                 tgBean.setDomain(str);
                 tgBean.setCategoryIds(categoryIds);
-                tgDAO.addBean(tgBean);
+                
+                TgBean bean = new TgBean();
+                bean.setDomain(str);
+                bean = tgDAO.findBean(bean);
+                
+                if(bean==null){
+                    tgDAO.addBean(tgBean);                    
+                }
             }
             
         }
