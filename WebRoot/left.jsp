@@ -83,6 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>  
    	<div class="easyui-accordion" data-options="multiple:true" style="width:250px;height1:300px;">
 		<div title="设置"  style="overflow:auto;padding:10px;" >
+		<p> <a href="<%=request.getContextPath() %>/setting.jsp">配置</a></p>
 		  <p> <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a></p>	
 		  <p> <a href="<%=request.getContextPath() %>/CategoryServlet">资源分类</a></p>				   
 		</div>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.chong.DAO.ResourceDAO;
 import com.chong.bean.ResourceBean;
 import com.chong.common.base.BaseAjaxServlet;
+import com.chong.common.base.bean.AjaxJsonBean;
 import com.chong.common.util.JacksonUtil;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -74,6 +75,17 @@ public class ResourceAjaxServlet extends BaseAjaxServlet
         ResourceBean ResourceBean = new ResourceBean();
         ResourceBean.setId(id);
         resourceDAO.deleteBean(ResourceBean);
+    }
+    
+    public ResourceBean find(HttpServletRequest req, HttpServletResponse resp)
+    {
+        String id = req.getParameter("id");
+        ResourceBean ResourceBean = new ResourceBean();
+        ResourceBean.setId(id);
+        ResourceBean = resourceDAO.findBean(ResourceBean);
+        
+        return ResourceBean;
+        
     }
     
 }

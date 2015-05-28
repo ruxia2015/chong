@@ -42,10 +42,16 @@
 								valueField:'id',textField:'name',
 								url:_contextPath+"/ResourceTypeAjaxServlet"
 							}
-						}/*,formatter : function(value, rec) {
 							
-
-						}		*/		
+						}
+						},  
+						{field:'categoryId',title:'资源分类',width:100,editor : {
+							type : 'combobox',
+							options : {
+								valueField:'id',textField:'category',
+								url:_contextPath+"/CategoryAjaxServlet"
+							}
+						}			
 						
 						},  
 						{field:'accessState',title:'可否访问',width:100,editor : {

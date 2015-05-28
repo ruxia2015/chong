@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.chong.common.util.PropertyUtil;
+import com.chong.listener.Thread.BackDatabaseThread;
 import com.chong.listener.Thread.WebsitRpThread;
 import com.chong.listener.Thread.WebsiteConnectThread;
 
@@ -46,6 +47,9 @@ public class AutoRunListener implements ServletContextListener
         WebsitRpThread rpThread = new WebsitRpThread();
         new Thread(rpThread).start();
         
+        //自动查询网站rp
+        BackDatabaseThread backDatabaseThread = new BackDatabaseThread();
+        new Thread(backDatabaseThread).start();
     }
     
     

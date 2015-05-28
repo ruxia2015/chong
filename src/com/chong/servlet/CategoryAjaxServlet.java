@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chong.DAO.CategoryDAO;
 import com.chong.bean.CategoryBean;
+import com.chong.bean.ResourceBean;
 import com.chong.common.base.BaseAjaxServlet;
 import com.chong.common.util.JacksonUtil;
 import com.chong.common.util.StringTools;
@@ -90,6 +91,18 @@ public class CategoryAjaxServlet extends BaseAjaxServlet
         CategoryBean categoryBean = new CategoryBean();
         categoryBean.setId(id);
         categoryDAO.deleteBean(categoryBean);
+    }
+    
+    
+    public CategoryBean find(HttpServletRequest req, HttpServletResponse resp)
+    {
+        String id = req.getParameter("id");
+        CategoryBean categoryBean = new CategoryBean();
+        categoryBean.setId(id);
+        categoryBean = categoryDAO.findBean(categoryBean);
+        
+        return categoryBean;
+        
     }
     
 }

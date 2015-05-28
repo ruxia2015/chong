@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chong.DAO.ResourceDAO;
 import com.chong.DAO.ResourceTypeDAO;
+import com.chong.bean.CategoryBean;
 import com.chong.bean.ResourceBean;
 import com.chong.bean.ResourceTypeBean;
 import com.chong.common.base.BaseAjaxServlet;
@@ -124,4 +125,14 @@ public class ResourceTypeAjaxServlet extends BaseAjaxServlet
         
     }
     
+    public ResourceTypeBean find(HttpServletRequest req, HttpServletResponse resp)
+    {
+        String id = req.getParameter("id");
+        ResourceTypeBean resourceTypeBean = new ResourceTypeBean();
+        resourceTypeBean.setId(id);
+        resourceTypeBean = resourceTypeDAO.findBean(resourceTypeBean);
+        
+        return resourceTypeBean;
+        
+    }
 }
