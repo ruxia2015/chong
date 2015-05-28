@@ -12,6 +12,8 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/tablesort/js/jquery.tablesorter.widgets.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.easyui.min.js"></script>
 
+<script type="text/javascript" src="<%=request.getContextPath() %>/userjs/common.js"></script>
+
 <script type="text/javascript" >
 	_contextPath = "<%=request.getContextPath()%>";
 </script>

@@ -8,6 +8,23 @@
 <title>推广资源管理</title>
 
 <jsp:include page="common.jsp" />
+
+<script type="text/javascript">
+	
+	function init(){
+		var tagName  = "${tagName}";
+		var tgId = "${tgId}";		
+		var url ="<%=request.getContextPath()%>/ResourceTgServlet?tgId="+tgId;  
+		var name = '推广_'+tagName;
+		$('#tgTabs').tabs('add',{
+				title: name,
+				content: '<iframe width="97%" height="95%" src="'+url+'"/>',
+				closable: true
+			});
+	}
+
+</script>
+
 </head>
 <body>
 <jsp:include page="top.jsp"/>

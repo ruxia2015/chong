@@ -11,7 +11,7 @@
 			fitColumns:true,
 			singleSelect:true,
 //			iconCls:"icon-save",//图标
-			title:"推广网站管理",
+			title:"推广网站管理（所要推广的网站）",
 			columns:[[      //每个列具体内容
 		              {
 		            	  field:'id',
@@ -25,6 +25,9 @@
 								//required : true
 							}
 						}},   
+						
+			              {field:'categoryIds',title:'网站类别',width:100
+							}, 
 		              {field:'remark',title:'备注',width:100,editor : {
 							type : 'validatebox'
 							
@@ -140,7 +143,7 @@
 						if (r.successCode==0) {
 							datagrid.datagrid('acceptChanges');
 							$.messager.show({
-								msg : "tianjiachenggong",
+								msg : "添加成功！",
 								title : '成功'
 							});
 							editRow = undefined;

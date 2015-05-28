@@ -67,17 +67,17 @@
 			        					data : {"id":rows[0].id},
 			        					dataType : 'json',
 			        					success : function(r) {
-			        						if (r.success) {
+			        						if (r.successCode==0) {
 			        							datagrid.datagrid('acceptChanges');
 			        							$.messager.show({
-			        								msg : r.msg,
+			        								msg : "删除成功",
 			        								title : '成功'
 			        							});
-			        							editRow = undefined;
+			        							rowEditor = undefined;
 			        							datagrid.datagrid('reload');
 			        						} else {
 			        							/*datagrid.datagrid('rejectChanges');*/
-			        							datagrid.datagrid('beginEdit', editRow);
+			        							datagrid.datagrid('beginEdit', rowEditor);
 			        							$.messager.alert('错误', r.msg, 'error');
 			        						}
 			        						datagrid.datagrid('unselectAll');
@@ -139,7 +139,7 @@
 						if (r.successCode==0) {
 							datagrid.datagrid('acceptChanges');
 							$.messager.show({
-								msg : "tianjiachenggong",
+								msg : "添加成功",
 								title : '成功'
 							});
 							editRow = undefined;
@@ -155,12 +155,15 @@
 				
 			},
 			onDblClickCell:function(rowIndex, field, value){
-				if(rowEditor==undefined)
-				{
-		        	datagrid.datagrid('beginEdit',rowIndex);
-		        	rowEditor=rowIndex;
-				}
-				
+				if (rowEditor != rowIndex){
+					if (endEditing()){
+						datagrid.datagrid('selectRow', rowIndex)
+								.datagrid('beginEdit', rowIndex);
+						rowEditor=rowIndex;
+					} else {
+						$('#dg').datagrid('selectRow', rowIndex);
+					}
+				}			
 			}
 		});
 		function pagerFilter(data){
@@ -199,5 +202,17 @@
 		$(function(){
 			$('#dg').datagrid({loadFilter:pagerFilter})	;
 		});
+		
+		
+		function endEditing(){
+			if (rowEditor == undefined){return true}
+			if ($('#dg').datagrid('validateRow', rowEditor)){
+				$('#dg').datagrid('endEdit', rowEditor);
+				rowEditor = undefined;
+				return true;
+			} else {
+				return false;
+			}
+		}
 		
 	})

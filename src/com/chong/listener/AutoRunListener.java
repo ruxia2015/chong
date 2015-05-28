@@ -20,8 +20,9 @@ public class AutoRunListener implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent arg0)
     {
+        System.out.println("启动监听器=============");
         PropertyUtil propertyUtil = new PropertyUtil(
-                PropertyUtil.class.getResource("/cConfig.properties").getPath());
+                PropertyUtil.class.getResource("/config.properties").getPath());
         
         Boolean checkCon = Boolean.parseBoolean(propertyUtil.getValue("auto.checkConnection"));
         Boolean checkRp =  Boolean.parseBoolean(propertyUtil.getValue("auto.queryRp"));

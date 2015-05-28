@@ -11,9 +11,24 @@ public class TgBean
     private String domain;
     
 	@SQLAnnotation
+	private String categoryIds;
+	
+	
+	@SQLAnnotation
     private String remark;
 
 
+	
+
+    public String getCategoryIds()
+    {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(String categoryIds)
+    {
+        this.categoryIds = categoryIds;
+    }
 
     public String getId() {
 		return id;

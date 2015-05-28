@@ -11,8 +11,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.chong.DAO.CategoryDAO;
 import com.chong.DAO.ResourceDAO;
 import com.chong.DAO.ResourceTypeDAO;
+import com.chong.bean.CategoryBean;
 import com.chong.bean.ResourceBean;
 import com.chong.bean.ResourceTypeBean;
 import com.chong.common.base.BaseServlet;
@@ -26,15 +28,20 @@ public class ResourceServlet extends BaseServlet
     
     private ResourceDAO resourceDAO = new ResourceDAO();
     
+    private CategoryDAO categoryDAO = new CategoryDAO();
+    
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
             throws Exception
     {
-        ResourceTypeBean bean = new ResourceTypeBean();
-        
-        List<ResourceTypeBean> beans = resourceTypeDAO.queryList(bean);
-        
+        ResourceTypeBean bean = new ResourceTypeBean();        
+        List<ResourceTypeBean> beans = resourceTypeDAO.queryList(bean);        
         req.setAttribute("resourceTypeList", beans);
+        
+        
+        CategoryBean categoryBean = new CategoryBean();
+        List<CategoryBean> categoryBeans = categoryDAO.queryList(categoryBean);        
+        req.setAttribute("categoryList", categoryBeans);
         
         req.getRequestDispatcher("/queryResource.jsp").forward(req, resp);
         
@@ -111,6 +118,11 @@ public class ResourceServlet extends BaseServlet
     {
         List<ResourceTypeBean> resourceTypeBeans = resourceTypeDAO.queryList(new ResourceTypeBean());
         req.setAttribute("resourceTypes", resourceTypeBeans);
+        
+        CategoryBean categoryBean = new CategoryBean();
+        List<CategoryBean> categoryBeans = categoryDAO.queryList(categoryBean);        
+        req.setAttribute("categoryList", categoryBeans);
+        
         req.getRequestDispatcher("/addResource.jsp").forward(req, resp);
         
     }
@@ -120,6 +132,7 @@ public class ResourceServlet extends BaseServlet
     {
         String urls = req.getParameter("urls");
         String resourceType = req.getParameter("resourceType");
+        String categoryId = req.getParameter("categoryId");
         String override = req.getParameter("override");
         
         String message = "";
@@ -152,6 +165,11 @@ public class ResourceServlet extends BaseServlet
                    resourceBean.setType(resourceType);
                    resourceBean.setDomain(domain);
                    resourceBean.setUrl(str);
+                   resourceBean.setCategoryId(categoryId);
+                   resourceBean.setPr("-1");
+                   resourceBean.setAccessState("-1");
+                   resourceBean.setRegisterState("-1");
+                   resourceBean.setOtherState("-1");
                    resourceDAO.addBean(resourceBean);
                    addCnt++;
                }
@@ -170,7 +188,6 @@ public class ResourceServlet extends BaseServlet
        }
        
        req.setAttribute("message", message);
-//       req.getRequestDispatcher("/addResource.jsp").forward(req, resp);       
        toAdd(req, resp);
         
         

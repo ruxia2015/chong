@@ -23,7 +23,7 @@
 	    <div style="color:red">${message }</div>
 	    	<table cellpadding="5">
 	    		<tr>
-	    			<td>资源类型:</td>
+	    			<td>资源类型：</td>
 	    			<td>
 	    				<select class="easyui-combobox" name="resourceType" panelHeight="auto">
 	    					<option value="">==请选择==</option>
@@ -35,13 +35,25 @@
 	    		</tr>
 	    		
 	    		<tr>
-	    			<td>是否覆盖:</td>
+	    			<td>资源类别：</td>
+	    			<td>
+	    				<select class="easyui-combobox" name="categoryId" panelHeight="auto">
+	    					<option value="">==请选择==</option>
+	    					<c:forEach items="${categoryList }" var="item">
+	    						<option value="${item.id }">${item.category}</option>
+	    					</c:forEach>
+	    				</select>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否覆盖：</td>
 	    			<td><input class="easyui-checkbox" type="checkbox" name="override" data-options="required:true,validType:'email'"></input>
 	    			（如果域名存在，是否将其覆盖为选中的资源类型？）
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>资源:</td>
+	    			<td>资源：</td>
 	    			<td><input class="easyui-textbox" name="urls" data-options="multiline:true" style="height:160px;width:500px;"></input>
 	    			<br/><br/>一行代表一个资源
 	    			</td>

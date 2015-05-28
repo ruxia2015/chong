@@ -31,7 +31,7 @@
 								}
 							}
 		           	 },   
-		              {field:'domain',title:'domain',width:100,editor : {
+		              {field:'domain',title:'域名',width:100,editor : {
 							type : 'validatebox',
 							options : {
 								//required : true
@@ -43,7 +43,7 @@
 								//required : true
 							}
 						}},  
-						{field:'type',title:'type',width:100,editor : {
+						{field:'type',title:'资源类型',width:100,editor : {
 							type : 'combobox',
 							options : {
 								valueField:'id',textField:'name',
@@ -55,7 +55,7 @@
 						}		*/		
 						
 						},  
-						{field:'accessState',title:'accessState',width:100,editor : {
+						{field:'accessState',title:'是否可以访问',width:100,editor : {
 							type : 'combobox',
 							options : {
 								valueField:'id',textField:'text',
@@ -63,6 +63,7 @@
 							}
 							
 						},
+
 						formatter : function(value, rec) {
 							if (value == 1) {
 								return "是";
@@ -72,7 +73,7 @@
 							return "否";
 
 						}},  
-						{field:'registerState',title:'registerState',width:100,editor : {
+						{field:'registerState',title:'是否可以注册',width:100,editor : {
 							type : 'combobox',
 							options : {
 								valueField:'id',textField:'text',
@@ -104,10 +105,14 @@
 
 							}
 						},  
-		              {field:'remark',title:'remark',width:100,editor : {
+		              {field:'remark',title:'备注信息',width:100,editor : {
 							type : 'validatebox'
 							
-						}}   
+						}} ,
+						{field:'pr',title:'pr',width:100,editor : {
+							type : 'validatebox'
+							
+						}}    
 		          ]],
 			toolbar:[              //工具条
 			        {text:"增加",iconCls:"icon-add",handler:function(){//回调函数

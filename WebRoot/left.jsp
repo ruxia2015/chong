@@ -16,15 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="expires" content="0">      
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">  
     <meta http-equiv="description" content="This is my page">  
- <%--    <link rel="stylesheet" href="<%=basePath%>css/zTreeStyle/zTreeStyle.css" type="text/css">  
-    <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>  
-    <script type="text/javascript" src="<%=basePath%>js/jquery.ztree.core-3.5.min.js"></script>  
-    <script type="text/javascript" src="<%=basePath%>js/jquery.ztree.exedit-3.5.min.js"></script>  
-    <script type="text/javascript" src="<%=basePath%>js/jquery.ztree.excheck-3.5.min.js"></script>  
-    <script type="text/javascript" src="<%=basePath%>js/jquery.ztree.exhide-3.5.min.js"></script>  
-    
-    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="css/themes/icon.css"> --%>
 
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	
@@ -67,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
    	function openTgResource(tagName,tgId){   
    		if(document.getElementById("tgTabs")==null){
-   			window.open("<%=request.getContextPath()%>/queryTgResourceMain.jsp" );   			
+   			window.open("<%=request.getContextPath()%>/queryTgResourceMain.jsp?tgId="+tgId+"&tagName="+tagName ); 
    		}else{
    			var url ="<%=request.getContextPath()%>/ResourceTgServlet?tgId="+tgId;  
    			var name = '推广_'+tagName;
@@ -83,27 +74,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	
    		}
    	}
+   	
+   	
+
    
    </script>
     
   <body>  
    	<div class="easyui-accordion" data-options="multiple:true" style="width:250px;height1:300px;">
 		<div title="设置"  style="overflow:auto;padding:10px;" >
-		   <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a>		   
+		  <p> <a href="<%=request.getContextPath() %>/ResourceTypeServlet">资源类型管理</a></p>	
+		  <p> <a href="<%=request.getContextPath() %>/CategoryServlet">资源分类</a></p>				   
 		</div>
 		<div title="资源管理" style="padding:10px;" >
-		<p>
-		  <a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a>
-		</p>
-		<p>
-		  <a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a>
-		</p>
+			<p><a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a></p>
+			<p><a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a></p>
 		</div>
 		<div title="推广网站管理" style="padding:10px;">
-
-		<div>
-		  <a href="<%=request.getContextPath() %>/TgServlet">推广网站管理</a>
-		</div>
+			<p><a href="<%=request.getContextPath() %>/TgServlet/m/toAdd.action">添加推广网站</a></p>
+			<p><a href="<%=request.getContextPath() %>/TgServlet">推广网站管理</a></p>
 		</div>
 		<div title="资源账号管理" style="padding:10px;" data-options="selected:true" id="tgs">
 

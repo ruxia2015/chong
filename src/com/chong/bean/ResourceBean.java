@@ -31,6 +31,13 @@ public class ResourceBean extends PageBean
     private String type;
     
     /**
+     * 资源分类
+     * 如：主要用于推广什么类型的网站（齿科、车载）
+     */
+    @SQLAnnotation
+    private String categoryId;
+    
+    /**
      * 可以访问状态
      * -1 等待检测   1 可以访问  2  不可以访问
      */
@@ -43,7 +50,9 @@ public class ResourceBean extends PageBean
      * -1 等待    1 可以注册  2 不可以注册
      */
     
-    @ExportHeaderAnnotation(headerName="注册状态",needConvert=true,convertKeys={"","-1","1","2"},convertValues={"未验证","等待","可以注册","不可以注册"})
+    @ExportHeaderAnnotation(headerName = "注册状态", needConvert = true, convertKeys = {
+            "", "-1", "1", "2" }, convertValues = { "未验证", "等待", "可以注册",
+            "不可以注册" })
     @SQLAnnotation
     private String registerState;
     
@@ -58,6 +67,48 @@ public class ResourceBean extends PageBean
      */
     @SQLAnnotation
     private String remark;
+    
+    @SQLAnnotation
+    private String pr;
+    
+    /**
+     * 资源分类
+     * 如：主要用于推广什么类型的网站（齿科、车载）
+     */
+    @SQLAnnotation(where_column = "categoryId", where_oper = "in", is_column = false)
+    private String categoryIds;
+    
+    
+    
+    public String getCategoryIds()
+    {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(String categoryIds)
+    {
+        this.categoryIds = categoryIds;
+    }
+
+    public String getCategoryId()
+    {
+        return categoryId;
+    }
+    
+    public void setCategoryId(String categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+    
+    public String getPr()
+    {
+        return pr;
+    }
+    
+    public void setPr(String pr)
+    {
+        this.pr = pr;
+    }
     
     public String getRemark()
     {

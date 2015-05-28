@@ -22,8 +22,7 @@ public class TgAjaxServlet extends BaseAjaxServlet
     @Override
     protected void execute(HttpServletRequest req, HttpServletResponse resp)
     {
-        TgBean bean = new TgBean();
-        
+        TgBean bean = new TgBean();        
         List<TgBean> beans = tgDAO.queryList(bean);
         try {
 			req.setAttribute("json", JacksonUtil.objToJson(beans));

@@ -4,6 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	
+	
+	<listener>
+		<listener-class>com.chong.listener.AutoRunListener</listener-class>
+	</listener>
+	
 	<filter>
   <filter-name>setCharacterEncoding</filter-name>
   <filter-class>com.chong.common.util.EncodingFilter</filter-class>
@@ -127,6 +132,33 @@
 	<servlet-mapping>
 		<servlet-name>ResourceTgServlet</servlet-name>
 		<url-pattern>/ResourceTgServlet/m/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<servlet-class>com.chong.servlet.CategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/CategoryServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/CategoryServlet/m/*</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>CategoryAjaxServlet</servlet-name>
+		<servlet-class>com.chong.servlet.CategoryAjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryAjaxServlet</servlet-name>
+		<url-pattern>/CategoryAjaxServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CategoryAjaxServlet</servlet-name>
+		<url-pattern>/CategoryAjaxServlet/m/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

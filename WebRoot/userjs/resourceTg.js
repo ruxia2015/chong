@@ -8,7 +8,7 @@ $(function() {
 						url : _contextPath+"/ResourceTgAjaxServlet?tgId=" + tgId,// 加载的URL
 						isField : "id",
 						pagination : true,// 显示分页
-						pageSize : 10,// 分页大小
+						pageSize : 20,// 分页大小
 						pageList : [ 5, 10, 15, 20 ],// 每页的个数
 						fit : true,// 自动补全
 						fitColumns : true,
@@ -21,7 +21,7 @@ $(function() {
 									title : 'id',
 									width : 100
 								},
-								{
+								/*{
 									field : 'tgId',
 									title : '推广网站Id',
 									width : 100,
@@ -33,20 +33,38 @@ $(function() {
 										return value;
 
 									}
-								}, {
+								},*/ {
 									field : 'resourceDomain',
 									title : '资源名称',
 									width : 100
 								},
 								{
+									field : 'resourceUrl',
+									title : '资源地址',
+									width : 100,
+									formatter : function(value, rec) {
+										var html ="<a href='"+value+"' target='_blank' title='"+value+"'>"+value+"</a>"
+										return html;
+
+									}
+								},
+								{
 									field : 'resourceTypeName',
 									title : '资源类型',
-									width : 100
+									width : 100,
+									align:"center"
+								}, 
+								{
+									field : 'category',
+									title : '资源类别',
+									width : 100,
+									align:"center"
 								}, 
 								{
 									field : 'registerState',
 									title : '是否可以注册',
 									width : 80,
+									align:"center",
 
 									formatter : function(value, rec) {
 										if (value == 1) {
@@ -254,12 +272,26 @@ $(function() {
 									});
 
 						},
-						onDblClickCell : function(rowIndex, field, value) {
-							if (rowEditor == undefined) {
-								datagrid.datagrid('beginEdit', rowIndex);
-								rowEditor = rowIndex;
-							}
-
+						onClickCell : function(rowIndex, field, value) {
+							if (rowEditor != rowIndex){
+								if (endEditing()){
+									datagrid.datagrid('selectRow', rowIndex)
+											.datagrid('beginEdit', rowIndex);
+									rowEditor=rowIndex;
+								} else {
+									$('#dg').datagrid('selectRow', rowIndex);
+								}
+							}			
+						},onDblClickCell : function(rowIndex, field, value) {
+							if (rowEditor != rowIndex){
+								if (endEditing()){
+									datagrid.datagrid('selectRow', rowIndex)
+											.datagrid('beginEdit', rowIndex);
+									rowEditor=rowIndex;
+								} else {
+									$('#dg').datagrid('selectRow', rowIndex);
+								}
+							}			
 						}
 					});
 	
@@ -300,5 +332,17 @@ $(function() {
 	$(function(){
 		$('#dg').datagrid({loadFilter:pagerFilter})	;
 	});
+	
+
+	function endEditing(){
+		if (rowEditor == undefined){return true}
+		if ($('#dg').datagrid('validateRow', rowEditor)){
+			$('#dg').datagrid('endEdit', rowEditor);
+			rowEditor = undefined;
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 })

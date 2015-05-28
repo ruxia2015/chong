@@ -14,7 +14,7 @@ public class PageRankUtil
            // "66.249.93.190", "72.14.203.107", "72.14.205.113", "72.14.255.107",
             };
     
-    public int getPR(String domain) { 
+    public static int getPR(String domain) { 
         String result = ""; 
         JenkinsHash jenkinsHash = new JenkinsHash();
         long hash = jenkinsHash.hash(("info:" + domain).getBytes()); 

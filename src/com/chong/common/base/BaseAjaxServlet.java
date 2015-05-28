@@ -19,25 +19,28 @@ public abstract class BaseAjaxServlet extends BaseServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
+        String msg = "成功！";
         
         Map<String, Object> param = req.getParameterMap();
         
 
 
     	try {
-			executeMethod(req, resp);
+    	    Object result = executeMethod(req, resp);
+		
+    	    if(result!=null && "String".equals(result.getClass())){
+    	        
+    	    }
+    	    
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}        
         String json = (String)req.getAttribute("json");
-        
-        System.out.println(json);
-        
         if(StringTools.isEmptyOrNone(json)){
             AjaxJsonBean jsonBean = new AjaxJsonBean();
             jsonBean.setSuccessCode("0");
-            
+            jsonBean.setMsg(msg);            
             json = JacksonUtil.objToJson(jsonBean);
         }
         
