@@ -93,6 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div title="资源管理" style="padding:10px;" >
 			<p><a href="<%=request.getContextPath() %>/ResourceServlet/m/toAdd.action">添加资源</a></p>
+			<p><a href="<%=request.getContextPath() %>/searchResources.jsp">自动查找</a></p>
 			<p><a href="<%=request.getContextPath() %>/ResourceServlet">资源管理</a></p>
 		</div>
 		<div title="资源账号管理" style="padding:10px;" data-options="selected:true" id="tgs">
