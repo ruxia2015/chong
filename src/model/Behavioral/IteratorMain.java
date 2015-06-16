@@ -1,4 +1,4 @@
-package model;
+package model.Behavioral;
 
 import java.util.Vector;
 

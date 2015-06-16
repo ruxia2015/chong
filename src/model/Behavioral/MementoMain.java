@@ -1,4 +1,4 @@
-package model;
+package model.Behavioral;
 
 public class MementoMain {
 	

@@ -1,4 +1,4 @@
-package model;
+package model.Behavioral;
 
 public class MediatorMain {
 
@@ -24,6 +24,12 @@ public class MediatorMain {
  * 
  */
 
+
+/**
+ * 中介者抽象
+ * @author xuruxia
+ *
+ */
 interface Mediator {
 	void send(String message, Colleague colleague);
 }
