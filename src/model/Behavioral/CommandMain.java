@@ -39,7 +39,7 @@ class ConcreteCommand extends Command{
 	}
 
 	@Override
-	public void execute() {
+	public void execute() {	
 		receiver.action();
 		
 	}
